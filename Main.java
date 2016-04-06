@@ -14,7 +14,7 @@ public class Main extends Application {
 
 	private Scene scene;
 
-	enum Screens {SCREEN_1, SCREEN_1A,SCREEN_2,SCREEN_2A, SCREEN_2A1,SCREEN_2B,SCREEN_2B1,SCREEN_2B2,
+	public enum Screens {SCREEN_1, SCREEN_1A,SCREEN_2,SCREEN_2A, SCREEN_2A1,SCREEN_2B,SCREEN_2B1,SCREEN_2B2,
 					SCREEN_2B3,SCREEN_2C,SCREEN_2D,SCREEN_2D1};
 	@Override
 	public void start(Stage primaryStage) {
