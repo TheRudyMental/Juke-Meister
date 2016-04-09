@@ -39,27 +39,33 @@ public class Main extends Application {
 					root = (Pane) Screen_1.getInstance();
 					break;
 			case SCREEN_1A:
-				break;
+					root = (Pane) Screen_1A.getInstance();
+					break;
 			case SCREEN_2:
 				break;
 			case SCREEN_2A:
-				break;
+					root = (Pane) Screen_2A.getInstance();
+					break;
 			case SCREEN_2A1:
 				break;
 			case SCREEN_2B:
 				break;
 			case SCREEN_2B1:
-				break;
+					root = (Pane) Screen_2B1.getInstance();
+					break;
 			case SCREEN_2B2:
 				break;
 			case SCREEN_2B3:
 				break;
 			case SCREEN_2C:
-				break;
+					root = (Pane) Screen_2C.getInstance();
+					break;
 			case SCREEN_2D:
-				break;
+					root = (Pane) Screen_2D.getInstance();
+					break;
 			case SCREEN_2D1:
-				break;
+					root = (Pane) Screen_2D1.getInstance();
+					break;
 			default:
 				break;
 		}
