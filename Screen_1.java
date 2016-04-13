@@ -3,21 +3,28 @@ package Screen;
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 public class Screen_1 extends GridPane implements ScreenInterface{
 
 	private static Screen_1 instance;
+	
+	private Button browse;
 
-	private Screen_1() {
+	Screen_1() {
 		setConstraints();
 		makeComponents();
 	}
@@ -73,6 +80,7 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 	/**
 	 * This method defines the components on the screen and adds them to it.
 	 */
+	@SuppressWarnings("unchecked")
 	private void makeComponents(){
 		Label vName = new Label("Venue Name");
 		Label message = new Label("Message");
@@ -86,11 +94,13 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 
 		this.add(pop,0,2,1,1);
 		this.add(newSongs,2,2,1,1);
+		
+		
 
 		//The list stuff will go here, empty for now
 
-		Button browse = new Button("Browse");
-		//Add listener for the button later
+		browse = new Button("Browse");
+		browse.setOnAction(buttonHandler);
 		this.add(browse,1,4,1,1);
 
 		Label nowPlaying = new Label("Now Playing"); //make this its own component later
@@ -112,7 +122,19 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 
 		setCenterAlignment();
 	}//end makeComponents
-
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==browse){
+        	if(UIBuilder.getScreen_1A().getScene()==null)
+        		temp.setScene(new Scene(UIBuilder.getScreen_1A()));
+        	else
+        		temp.setScene(UIBuilder.getScreen_1A().getScene());
+        }
+        temp.show();
+        }
+    };
 
 	void setCenterAlignment(){
 		ObservableList<Node> elements = this.getChildren();

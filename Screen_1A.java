@@ -1,6 +1,10 @@
 package Screen;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -9,12 +13,14 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 public class Screen_1A extends GridPane implements ScreenInterface {
 	
-	private static Screen_1A instance;
+	private static Screen_1A instance; 
+	Button back;
 	
-	private Screen_1A(){
+	Screen_1A(){
 		setConstraints();
 		makeComponents();
 	}
@@ -61,9 +67,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 	}
 
 	private void makeComponents(){
-		Button back = new Button("Back");
-		//Listener
-		makeScale(back);
+		back = new Button("Back");
+		back.setOnAction(buttonHandler);
 		this.add(back,0,0);	
 		
 		TextField search = new TextField();
@@ -99,6 +104,19 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		this.add(nowplaying, 0, 2, 2, 1);
 		
 	}
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==back){
+        	if(UIBuilder.getScreen_1A().getScene()==null)
+        		temp.setScene(new Scene(UIBuilder.getScreen_1A()));
+        	else
+        		temp.setScene(UIBuilder.getScreen_1A().getScene());
+        }
+        temp.show();
+        }
+    };
 	
 
 
