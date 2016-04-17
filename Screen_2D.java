@@ -1,8 +1,11 @@
 package Screen;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,6 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /*
  * @author Grant Brown
@@ -21,7 +25,11 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 
 	private static Screen_2D instance;
 
-	private Screen_2D() {
+	private Button back;
+
+	private Button advanced;
+
+	Screen_2D() {
 		setContraints();
 		setupComponents();
 	}
@@ -51,8 +59,9 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 	}
 
 	private void setupComponents(){
-		Button back = new Button("Back");
+		back = new Button("Back");
 		back.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+		back.setOnAction(buttonHandler);
 		this.add(back, 0, 0);
 
 
@@ -76,9 +85,10 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 		screenSaver.getChildren().addAll(screen,toggle2);
 		screenSaver.setSpacing(30);
 
-		Button advanced = new Button("Advanced Options");
+		advanced = new Button("Advanced Options");
 		advanced.setWrapText(true);
 		advanced.setPrefSize(150,100);
+		advanced.setOnAction(buttonHandler);
 
 		VBox whole = new VBox();
 		whole.getChildren().addAll(attract,minutes,screenSaver,advanced);
@@ -90,4 +100,18 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 		setHalignment(whole, HPos.CENTER);
 		setValignment(whole, VPos.CENTER);
 	}
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==back){
+        	temp.setScene(ScreenBuilder.buildScreen2());
+        }
+        if(event.getSource()==advanced){
+        	temp.setScene(ScreenBuilder.buildScreen2d1());
+        }
+        temp.setFullScreen(true);
+        temp.show();
+        }
+    };
 }

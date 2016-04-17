@@ -2,19 +2,25 @@ package Screen;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
 public class Screen_2A1 extends GridPane implements ScreenInterface {
 	
 	private static Screen_2A1 instance;
 	
-	private Screen_2A1(){
+	private Button back;
+	
+	Screen_2A1(){
 		setConstraints();
 		makeComponents();
 	}
@@ -56,8 +62,9 @@ public class Screen_2A1 extends GridPane implements ScreenInterface {
 	}
 	private void makeComponents(){
 		
-		Button back = new Button("Back");
+		back = new Button("Back");
 		setup(back);
+		back.setOnAction(buttonHandler);
 		this.add(back, 0, 0);
 		
 		Label text = new Label("Table of Previous Weeks");
@@ -75,5 +82,17 @@ public class Screen_2A1 extends GridPane implements ScreenInterface {
 		
 		
 	}
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==back){
+        	temp.setScene(ScreenBuilder.buildScreen2a());
+ 
+        }
+        temp.setFullScreen(true);
+        temp.show();
+        }
+    };
 
 }

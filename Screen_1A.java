@@ -109,11 +109,10 @@ public class Screen_1A extends GridPane implements ScreenInterface {
         public void handle(ActionEvent event) {
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
         if(event.getSource()==back){
-        	if(UIBuilder.getScreen_1A().getScene()==null)
-        		temp.setScene(new Scene(UIBuilder.getScreen_1A()));
-        	else
-        		temp.setScene(UIBuilder.getScreen_1A().getScene());
+        	temp.setScene(ScreenBuilder.buildScreen1());
+ 
         }
+        temp.setFullScreen(true);
         temp.show();
         }
     };

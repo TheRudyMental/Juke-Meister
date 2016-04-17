@@ -1,6 +1,6 @@
 package Screen;
 
-import java.util.ArrayList;
+
 
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +14,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
@@ -127,11 +126,9 @@ public class Screen_1 extends GridPane implements ScreenInterface{
         public void handle(ActionEvent event) {
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
         if(event.getSource()==browse){
-        	if(UIBuilder.getScreen_1A().getScene()==null)
-        		temp.setScene(new Scene(UIBuilder.getScreen_1A()));
-        	else
-        		temp.setScene(UIBuilder.getScreen_1A().getScene());
+        	temp.setScene(ScreenBuilder.buildScreen1a());
         }
+        temp.setFullScreen(true);
         temp.show();
         }
     };

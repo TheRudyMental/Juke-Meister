@@ -16,7 +16,7 @@ public class Screen_2B1 extends Screen_add implements ScreenInterface{
 
 	private static Screen_add instance;
 
-	private Screen_2B1() {
+	Screen_2B1() {
 		new Screen_add();
 		Button addSingle = new Button("Add Single");
 		this.add(addSingle, 1,1,1,1);

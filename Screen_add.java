@@ -1,13 +1,18 @@
 package Screen;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 /**
  * 
  * @author JamieBurchette
@@ -17,6 +22,7 @@ import javafx.scene.layout.RowConstraints;
  */
 public class Screen_add extends GridPane implements ScreenInterface {
 	private static Screen_add instance;
+	private Button back;
 
 	protected Screen_add() {
 		setConstraints();
@@ -52,13 +58,13 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		}
 	}
 	private void makeComponents(){
-		Button backButton = new Button("Back");
-		this.add(backButton,0,0,1,1);
-		GridPane.setHalignment(backButton, HPos.LEFT);
-		GridPane.setValignment(backButton, VPos.TOP);
-		backButton.setMinSize(0, 0);
-		backButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back = new Button("Back");
 		
+		GridPane.setHalignment(back, HPos.LEFT);
+		GridPane.setValignment(back, VPos.TOP);
+		back.setMinSize(0, 0);
+		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		this.add(back,0,0,1,1);
 		
 		TextField title = new TextField();
 		TextField artist = new TextField();
@@ -92,5 +98,16 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		this.add(pictureButton, 2,5,1,1);
 		this.add(fileButton, 2,6,1,1);
 	}
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==back){
+        	temp.setScene(ScreenBuilder.buildScreen2b());
+        }
+        temp.setFullScreen(true);
+        temp.show();
+        }
+    };
 
 }

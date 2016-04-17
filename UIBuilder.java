@@ -1,11 +1,11 @@
 package Screen;
 
-
+import javafx.scene.layout.Pane;
 
 public class UIBuilder {
 	private static Screen_1 screen1;
 	private static Screen_1A screen1a;
-	//private static Screen_2 screen2;
+	private static Screen_2 screen2;
 	private static Screen_2A screen2a;
 	private static Screen_2A1 screen2a1;
 	//private static Screen_2B screen2b;
@@ -15,7 +15,7 @@ public class UIBuilder {
 	private static Screen_2D screen2d;
 	private static Screen_2D1 screen2d1;
 	
-	public static Screen_1 getScreen_1(){
+	public static Pane getScreen_1(){
 		if(screen1 == null) 
 			screen1 = new Screen_1();
 		return screen1;
@@ -27,7 +27,11 @@ public class UIBuilder {
 		return screen1a;
 	}
 
-	//Screen_2
+	public static Screen_2 getScreen_2(){
+		if(screen2 == null)
+			screen2 = new Screen_2();
+		return screen2;
+	}
 	public static Screen_2A getScreen_2A(){
 		if(screen2a == null)
 			screen2a = new Screen_2A();

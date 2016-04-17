@@ -1,13 +1,17 @@
 package Screen;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 /**
  * Credit Options screen
@@ -19,8 +23,10 @@ import javafx.scene.layout.RowConstraints;
 public class Screen_2C extends GridPane implements ScreenInterface{
 
 	private static Screen_2C instance;
+	
+	private Button back;
 
-	private Screen_2C() {
+	Screen_2C() {
 		setConstraints();
 		makeComponents();
 	}
@@ -70,12 +76,13 @@ public class Screen_2C extends GridPane implements ScreenInterface{
 	 * This method defines the components on the screen and adds them to it.
 	 */
 	private void makeComponents(){
-		Button backButton = new Button("Back");
-		this.add(backButton,0,0,1,1);
-		GridPane.setHalignment(backButton, HPos.LEFT);
-		GridPane.setValignment(backButton, VPos.TOP);
-		backButton.setMinSize(0, 0);
-		backButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back = new Button("Back");
+		this.add(back,0,0,1,1);
+		GridPane.setHalignment(back, HPos.LEFT);
+		GridPane.setValignment(back, VPos.TOP);
+		back.setMinSize(0, 0);
+		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back.setOnAction(buttonHandler);
 		
 		TextField pricePerCredit = new TextField();
 		TextField buy = new TextField();
@@ -93,4 +100,16 @@ public class Screen_2C extends GridPane implements ScreenInterface{
 		GridPane.setHalignment(creditsPerBonus, HPos.CENTER);
 		this.add(creditsPerBonus, 1,2,1,1);
 		}
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==back){
+        	temp.setScene(ScreenBuilder.buildScreen2());
+        }
+        temp.setFullScreen(true);
+        temp.show();
+        }
+    };
 }
+

@@ -1,13 +1,17 @@
 package Screen;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 /**
  * Stats screen
@@ -19,8 +23,12 @@ import javafx.scene.layout.RowConstraints;
 public class Screen_2A extends GridPane implements ScreenInterface{
 
 	private static Screen_2A instance;
+	
+	private Button back;
+	
+	private Button table;
 
-	private Screen_2A() {
+	Screen_2A() {
 		setConstraints();
 		makeComponents();
 	}
@@ -75,12 +83,13 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 	 * This method defines the components on the screen and adds them to it.
 	 */
 	private void makeComponents(){
-		Button backButton = new Button("Back");
-		this.add(backButton,0,0,1,1);
-		GridPane.setHalignment(backButton, HPos.LEFT);
-		GridPane.setValignment(backButton, VPos.TOP);
-		backButton.setMinSize(0, 0);
-		backButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back = new Button("Back");
+		this.add(back,0,0,1,1);
+		GridPane.setHalignment(back, HPos.LEFT);
+		GridPane.setValignment(back, VPos.TOP);
+		back.setMinSize(0, 0);
+		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back.setOnAction(buttonHandler);
 				
 		Label topTracks = new Label("Top Tracks");
 		Label leastPlayed = new Label("Least Played");
@@ -110,11 +119,27 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 		GridPane.setHalignment(totalFunds,HPos.CENTER);
 		GridPane.setHalignment(currentFunds,HPos.CENTER);
 		
-		Button table = new Button("Table of Previous Weeks");
+		table = new Button("Table of Previous Weeks");
 		this.add(table,1,5,2,1);
 		GridPane.setHalignment(table,HPos.CENTER);
 		table.setPrefSize(200, Double.MAX_VALUE);
 		table.setMinSize(0, 0);
+		table.setOnAction(buttonHandler);
 	}
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==back){
+        	temp.setScene(ScreenBuilder.buildScreen2());
+ 
+        }
+        if(event.getSource()==table){
+        	temp.setScene(ScreenBuilder.buildScreen2a());
+        }
+        temp.setFullScreen(true);
+        temp.show();
+        }
+    };
 
 }

@@ -2,6 +2,7 @@ package application;
 
 
 
+import Screen.ScreenBuilder;
 import Screen.Screen_1A;
 import Screen.Screen_2A;
 import Screen.Screen_2A1;
@@ -12,29 +13,31 @@ import Screen.Screen_2D;
 import Screen.Screen_2D1;
 import Screen.UIBuilder;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 
 
 public class Main extends Application {
-
-	private Pane root;
 
 	private Scene scene;
 	
 	private static Main instance;
 	
 	boolean runOnce = true;
-
-	public enum S {SCREEN_1,SCREEN_1A,SCREEN_2,SCREEN_2A,SCREEN_2A1,SCREEN_2B,SCREEN_2B1,SCREEN_2B2,
-					SCREEN_2B3,SCREEN_2C,SCREEN_2D,SCREEN_2D1};
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try{ 
-			Pane root = UIBuilder.getScreen_1();
-			scene = new Scene(root);
+			scene = ScreenBuilder.buildScreen1();
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			scene.setOnKeyPressed(keyHandler);
 			primaryStage.setScene(scene);
 			primaryStage.setFullScreen(true);
 			primaryStage.show();
@@ -46,6 +49,21 @@ public class Main extends Application {
 	public static void main(String[] args) {
 		launch(args);
 	}
+	EventHandler<InputEvent> keyHandler = new EventHandler<InputEvent>() {
+        @Override
+        public void handle(InputEvent event) {
+        Stage temp = (Stage) scene.getWindow();
+        if(event instanceof KeyEvent){
+        	KeyEvent key = (KeyEvent) event;
+        	if(key.getCode()==KeyCode.A){
+        		temp.setScene(ScreenBuilder.buildScreen2());
+        		
+        	}
+        }
+        temp.setFullScreen(true);
+        temp.show();
+        }
+    };
 
 
 	

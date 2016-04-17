@@ -1,13 +1,17 @@
 package Screen;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /*
  * @author Grant Brown
@@ -16,8 +20,9 @@ import javafx.scene.layout.VBox;
 public class Screen_2D1 extends BorderPane implements ScreenInterface{
 
 	private static Screen_2D1 instance;
+	Button back;
 
-	private Screen_2D1() {
+	Screen_2D1() {
 		makeComponents();
 	}
 
@@ -32,8 +37,9 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface{
 	}
 
 	private void makeComponents(){
-		Button back = new Button("Back");
+		back = new Button("Back");
 		back.setMaxSize(75, Integer.MAX_VALUE);
+		back.setOnAction(buttonHandler);
 		this.setTop(back);
 
 
@@ -65,7 +71,20 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface{
 		contain.setSpacing(20);
 		contain.setPadding(new Insets( 250, 0, 0, 600));
 		this.setCenter(contain);
+		
+		
 
 	}
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==back){
+        	temp.setScene(ScreenBuilder.buildScreen1a());
+        }
+        temp.setFullScreen(true);
+        temp.show();
+        }
+    };
 
 }
