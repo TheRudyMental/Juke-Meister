@@ -1,9 +1,18 @@
 package Database;
 
+/**
+ * 
+ * @author JamieBurchette
+ *
+ */
 public interface CreditsIF {
 	public void addCredit();
 	
-	public void changePrice(int newPrice);
+	public void setPrice(int newPrice);
+	
+	public void setBuyBonus(int newBonus);
+	
+	public void setGetBonus(int newBonus);
 	
 	public void removeWhenPlay();
 	
