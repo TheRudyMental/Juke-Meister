@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -69,7 +68,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 	private void makeComponents(){
 		back = new Button("Back");
 		back.setOnAction(buttonHandler);
-		this.add(back,0,0);	
+		this.add(back,0,0);
+		makeScale(back);
 		
 		TextField search = new TextField();
 		search.setPromptText("Search...");

@@ -135,7 +135,7 @@ public class Screen_2A extends GridPane implements ScreenInterface{
  
         }
         if(event.getSource()==table){
-        	temp.setScene(ScreenBuilder.buildScreen2a());
+        	temp.setScene(ScreenBuilder.buildScreen2a1());
         }
         temp.setFullScreen(true);
         temp.show();

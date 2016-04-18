@@ -1,15 +1,24 @@
 package Screen;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
 
 
-public class Screen_2b extends GridPane implements ScreenInterface{
+public class Screen_2B extends GridPane implements ScreenInterface{
 
-	private static Screen_2b instance;
+	private static Screen_2B instance;
+	
+	Button back;
+	Button single;
+	Button album;
+	Button song;
 
-	private Screen_2b() {
+	Screen_2B() {
 		setConstraints();
 		makeComponents();
 	}
@@ -23,7 +32,7 @@ public class Screen_2b extends GridPane implements ScreenInterface{
 			return instance;
 		}
 		else{
-			instance = new Screen_2b();
+			instance = new Screen_2B();
 			return instance;
 		}
 	}
@@ -64,8 +73,8 @@ public class Screen_2b extends GridPane implements ScreenInterface{
 	 */
 	private void makeComponents(){
 
-		Button back = new Button("Back");
-		//Add listener for the button later
+		back = new Button("Back");
+		back.setOnAction(buttonHandler);
 		back.setMinSize(0, 0);
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		this.add(back,0,0);
@@ -91,23 +100,24 @@ public class Screen_2b extends GridPane implements ScreenInterface{
 	    subcol.setPercentWidth(100);
 	    gridpane2.getColumnConstraints().addAll(subcol);
 	 
-		Button single = new Button("Add Single");
+		single = new Button("Add Single");
+		single.setOnAction(buttonHandler);
 		single.setMinSize(0, 0);
 		single.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		single.setWrapText(true);
 		gridpane2.add(single,0,0);
 		
 		
-		Button album = new Button("Add Album");
-		//Add listener for the button later
+		album = new Button("Add Album");
+		album.setOnAction(buttonHandler);
 		album.setMinSize(0, 0);
 		album.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		album.setWrapText(true);
 		gridpane2.add(album,0,2);
 		
 		
-		Button song = new Button("Remove Song");
-		//Add listener for the button later
+		song = new Button("Remove Song");
+		song.setOnAction(buttonHandler);
 		song.setMinSize(0, 0);
 		song.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		song.setWrapText(true);
@@ -119,5 +129,21 @@ public class Screen_2b extends GridPane implements ScreenInterface{
 		
 	
 	}//end makeComponents
-	
+	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
+        if(event.getSource()==back){
+        	temp.setScene(ScreenBuilder.buildScreen2());
+        }
+        if(event.getSource()==single){
+        	temp.setScene(ScreenBuilder.buildScreen2b1());
+        }
+        if(event.getSource()==album){
+        	temp.setScene(ScreenBuilder.buildScreen2b2());
+        }
+        temp.setFullScreen(true);
+        temp.show();
+        }
+    };
 }

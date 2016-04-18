@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -59,7 +58,7 @@ public class Screen_add extends GridPane implements ScreenInterface {
 	}
 	private void makeComponents(){
 		back = new Button("Back");
-		
+		back.setOnAction(buttonHandler);
 		GridPane.setHalignment(back, HPos.LEFT);
 		GridPane.setValignment(back, VPos.TOP);
 		back.setMinSize(0, 0);

@@ -48,7 +48,7 @@ public class ScreenBuilder {
 	}
 	public static Scene buildScreen2b(){
 		if(screen2b == null){
-			screen2b = new Scene(UIBuilder.getScreen_1());
+			screen2b = new Scene(UIBuilder.getScreen_2B());
 		}
 		return screen2b;
 	}

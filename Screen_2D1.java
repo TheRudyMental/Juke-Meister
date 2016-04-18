@@ -80,7 +80,7 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface{
         public void handle(ActionEvent event) {
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
         if(event.getSource()==back){
-        	temp.setScene(ScreenBuilder.buildScreen1a());
+        	temp.setScene(ScreenBuilder.buildScreen2d());
         }
         temp.setFullScreen(true);
         temp.show();

@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -79,7 +78,6 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 	/**
 	 * This method defines the components on the screen and adds them to it.
 	 */
-	@SuppressWarnings("unchecked")
 	private void makeComponents(){
 		Label vName = new Label("Venue Name");
 		Label message = new Label("Message");
