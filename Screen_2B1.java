@@ -1,13 +1,19 @@
-package Screen;
+package screen;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 
 /**
  * Add Single screen
- * 
+ *
  * @author JamieBurchette, ZacharyLorenzo
  * @version 4/11/16
  *
@@ -23,8 +29,27 @@ public class Screen_2B1 extends Screen_add implements ScreenInterface{
 		GridPane.setHalignment(addSingle, HPos.CENTER);
 		addSingle.setPrefSize(400, 75);
 		addSingle.setMinSize(0, 0);
+		addSingle.setOnAction(add);
 	}
 
+	EventHandler<ActionEvent> add = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+        	if(!(title == null || artist == null ||
+        			year == null) && !(title.getText().isEmpty()||
+        		    artist.getText().isEmpty()|| year.getText().isEmpty())){
+        		//TODO: add song & Edit above so it works
+
+        	}
+        	else{
+        		Alert alert = new Alert(AlertType.INFORMATION);
+        		alert.setTitle("Error!");
+        		alert.setContentText("The title, artist, and year fields cannot be empty!");
+        		alert.initOwner((Stage)((Node) event.getSource()).getScene().getWindow());
+        		alert.showAndWait();
+        	}
+        }
+    };
 	/**
 	 * The getInstance method returns the singleton instance of the screen
 	 *  @return instance

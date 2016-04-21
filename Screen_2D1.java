@@ -1,4 +1,4 @@
-package Screen;
+package screen;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -71,8 +71,8 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface{
 		contain.setSpacing(20);
 		contain.setPadding(new Insets( 250, 0, 0, 600));
 		this.setCenter(contain);
-		
-		
+
+
 
 	}
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
@@ -80,7 +80,7 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface{
         public void handle(ActionEvent event) {
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
         if(event.getSource()==back){
-        	temp.setScene(ScreenBuilder.buildScreen2d());
+        	temp.setScene(ScreenBuilder.buildScreen2());
         }
         temp.setFullScreen(true);
         temp.show();

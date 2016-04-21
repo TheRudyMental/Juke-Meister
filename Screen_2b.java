@@ -1,4 +1,4 @@
-package Screen;
+package screen;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -9,16 +9,18 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 
-public class Screen_2B extends GridPane implements ScreenInterface{
+public class Screen_2b extends GridPane implements ScreenInterface{
 
-	private static Screen_2B instance;
-	
+	private static Screen_2b instance;
+
 	Button back;
-	Button single;
-	Button album;
-	Button song;
 
-	Screen_2B() {
+	Button single;
+
+	Button album;
+
+	Button song;
+	Screen_2b() {
 		setConstraints();
 		makeComponents();
 	}
@@ -32,7 +34,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 			return instance;
 		}
 		else{
-			instance = new Screen_2B();
+			instance = new Screen_2b();
 			return instance;
 		}
 	}
@@ -44,7 +46,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 	 */
 	private void setConstraints(){
 
-	
+
 	     ColumnConstraints col1 = new ColumnConstraints();
 	     col1.setPercentWidth(15);
 	     ColumnConstraints col2 = new ColumnConstraints();
@@ -63,7 +65,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 	     row3.setPercentHeight(60);
 	     RowConstraints row4 = new RowConstraints();
 	     row4.setPercentHeight(30);
-	    
+
 	     this.getRowConstraints().addAll(row1,row2,row3,row4);
 
 	}
@@ -73,16 +75,17 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 	 */
 	private void makeComponents(){
 
-		back = new Button("Back");
-		back.setOnAction(buttonHandler);
+	    back = new Button("Back");
+		//Add listener for the button later
 		back.setMinSize(0, 0);
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back.setOnAction(buttonHandler);
 		this.add(back,0,0);
-	
-		
+
+
 
 		GridPane gridpane2 = new GridPane();
-		
+
 		//another grid layout inside the grid
 		RowConstraints subrow1 = new RowConstraints();
 		subrow1.setPercentHeight(20);
@@ -95,40 +98,43 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 		RowConstraints subrow5 = new RowConstraints();
 		subrow5.setPercentHeight(20);
 	    gridpane2.getRowConstraints().addAll(subrow1,subrow2,subrow3,subrow4,subrow5);
-		
+
 	    ColumnConstraints subcol = new ColumnConstraints();
 	    subcol.setPercentWidth(100);
 	    gridpane2.getColumnConstraints().addAll(subcol);
-	 
+
 		single = new Button("Add Single");
-		single.setOnAction(buttonHandler);
 		single.setMinSize(0, 0);
 		single.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		single.setWrapText(true);
+		single.setOnAction(buttonHandler);
 		gridpane2.add(single,0,0);
-		
-		
+
+
 		album = new Button("Add Album");
-		album.setOnAction(buttonHandler);
+		//Add listener for the button later
 		album.setMinSize(0, 0);
 		album.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		album.setWrapText(true);
+		album.setOnAction(buttonHandler);
 		gridpane2.add(album,0,2);
-		
-		
+
+
 		song = new Button("Remove Song");
-		song.setOnAction(buttonHandler);
+		//Add listener for the button later
 		song.setMinSize(0, 0);
 		song.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		song.setWrapText(true);
+		song.setOnAction(buttonHandler);
 		gridpane2.add(song,0,4);
-		
-		
-		
+
+
+
 		this.add(gridpane2,2,2);
-		
-	
+
+
 	}//end makeComponents
+
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -136,11 +142,14 @@ public class Screen_2B extends GridPane implements ScreenInterface{
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen2());
         }
-        if(event.getSource()==single){
+        else if(event.getSource() == single){
         	temp.setScene(ScreenBuilder.buildScreen2b1());
         }
-        if(event.getSource()==album){
+        else if(event.getSource() == album){
         	temp.setScene(ScreenBuilder.buildScreen2b2());
+        }
+        else if(event.getSource() == song){
+        	temp.setScene(ScreenBuilder.buildScreen2b3());
         }
         temp.setFullScreen(true);
         temp.show();

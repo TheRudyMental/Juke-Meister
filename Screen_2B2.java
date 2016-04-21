@@ -1,4 +1,4 @@
-package Screen;
+package screen;
 
 import javafx.geometry.HPos;
 import javafx.scene.control.Button;

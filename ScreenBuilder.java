@@ -1,4 +1,4 @@
-package Screen;
+package screen;
 
 import javafx.scene.Scene;
 
@@ -11,17 +11,18 @@ public class ScreenBuilder {
 	private static Scene screen2b;
 	private static Scene screen2b1;
 	private static Scene screen2b2;
+	private static Scene screen2b3;
 	private static Scene screen2c;
 	private static Scene screen2d;
 	private static Scene screen2d1;
-	
+
 	public static Scene buildScreen1(){
 		if(screen1 == null){
 			screen1 = new Scene(UIBuilder.getScreen_1());
 		}
 		return screen1;
 	}
-	
+
 	public static Scene buildScreen1a(){
 		if(screen1a == null){
 			screen1a = new Scene(UIBuilder.getScreen_1A());
@@ -64,6 +65,14 @@ public class ScreenBuilder {
 		}
 		return screen2b2;
 	}
+
+	public static Scene buildScreen2b3(){
+		if(screen2b3 == null){
+			screen2b3 = new Scene(UIBuilder.getScreen_2b3());
+		}
+		return screen2b3;
+	}
+
 	public static Scene buildScreen2c(){
 		if(screen2c == null){
 			screen2c = new Scene(UIBuilder.getScreen_2C());

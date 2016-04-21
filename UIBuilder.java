@@ -1,4 +1,4 @@
-package Screen;
+package screen;
 
 import javafx.scene.layout.Pane;
 
@@ -8,12 +8,13 @@ public class UIBuilder {
 	private static Screen_2 screen2;
 	private static Screen_2A screen2a;
 	private static Screen_2A1 screen2a1;
-	private static Screen_2B screen2b;
+	private static Screen_2b screen2b;
 	private static Screen_2B1 screen2b1;
 	private static Screen_2B2 screen2b2;
 	private static Screen_2C screen2c;
 	private static Screen_2D screen2d;
 	private static Screen_2D1 screen2d1;
+	private static Screen_2b3 screen2b3;
 
 	public static Pane getScreen_1(){
 		if(screen1 == null)
@@ -42,21 +43,29 @@ public class UIBuilder {
 			screen2a1 = new Screen_2A1();
 		return screen2a1;
 	}
-	public static Screen_2B getScreen_2B(){
-		if(screen2b == null)
-			screen2b = new Screen_2B();
-		return screen2b;
+	//Screen_2B
+	public static Screen_2b getScreen_2B(){
+		if(screen2b == null){
+			screen2b = new Screen_2b();
 		}
-
+		return screen2b;
+	}
 	public static Screen_2B1 getScreen_2B1(){
 		if(screen2b1 == null)
 			screen2b1= new Screen_2B1();
 		return screen2b1;
 	}
+
 	public static Screen_2B2 getScreen_2B2(){
 		if(screen2b2 == null)
 			screen2b2 = new Screen_2B2();
 		return screen2b2;
+	}
+
+	public static Screen_2b3 getScreen_2b3(){
+		if(screen2b3 == null)
+			screen2b3 = new Screen_2b3();
+		return screen2b3;
 	}
 	public static Screen_2C getScreen_2C(){
 		if(screen2c == null)
