@@ -1,4 +1,4 @@
-package Database;
+package controller;
 
 /**
  * 
@@ -14,7 +14,9 @@ public class Credits implements CreditsIF{
 	private int getBonus;
 	private int bonusCredits;
 	private int creditsEntered;
-	
+	private double creditPrice;
+	private double currentMoney;
+		
 	public Credits(){
 		currentCredits = 0;
 		totalCredits = 0;
@@ -23,20 +25,20 @@ public class Credits implements CreditsIF{
 		getBonus = 1;
 		bonusCredits = 0;
 		creditsEntered = 0;
+		creditPrice = 0.25;
+		currentMoney = 0;
 	}
 
-	public void addCredit(){
+	public void addCredit(int added){
+		creditsEntered += added;
 		if(getBonus != 0){			
-			if(creditsEntered == buyBonus){
-				bonusCredits++;
-				creditsEntered = 0;
-			}
-			else{
-				creditsEntered++;
+			if(creditsEntered >= buyBonus){
+				bonusCredits += creditsEntered / buyBonus;
+				creditsEntered -= creditsEntered / buyBonus;
 			}
 		}
-		currentCredits++;
-		totalCredits++;
+		currentCredits += added;
+		totalCredits += added;
 	}
 	
 	public void setPrice(int newPrice){
@@ -85,6 +87,14 @@ public class Credits implements CreditsIF{
 	public void refund(){
 		totalCredits = totalCredits - currentCredits;
 		currentCredits = 0;
+	}
+	
+	public void insertMoney(double amount){
+		currentMoney += amount;
+		int creditsAdded = (int) (currentMoney / creditPrice);
+		currentMoney -= creditsAdded * creditPrice;
+		addCredit(creditsAdded);
+		
 	}
 	
 }

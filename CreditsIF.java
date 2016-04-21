@@ -1,4 +1,4 @@
-package Database;
+package controller;
 
 /**
  * 
@@ -6,7 +6,7 @@ package Database;
  *
  */
 public interface CreditsIF {
-	public void addCredit();
+	public void addCredit(int added);
 	
 	public void setPrice(int newPrice);
 	
