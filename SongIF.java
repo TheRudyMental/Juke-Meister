@@ -20,7 +20,7 @@ public interface SongIF {
 	
 	public int getMonthCount();
 	
-	public String getPlayingTime();
+	public long getDateAdded();
 	
 	public void setTitle(String title);
 	
@@ -38,7 +38,11 @@ public interface SongIF {
 	
 	public void setMonthCount(int monthCounter);
 	
-	public void setPlayingTime(String playingTime);
+	public void addCount();
+	
+	public void resetWeek();
+	
+	public void resetMonth();
 	
 	public boolean equals(String title);
 	
