@@ -1,4 +1,4 @@
-package screen;
+package Screen;
 
 
 
@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -79,7 +78,6 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 	/**
 	 * This method defines the components on the screen and adds them to it.
 	 */
-	@SuppressWarnings("unchecked")
 	private void makeComponents(){
 		Label vName = new Label("Venue Name");
 		Label message = new Label("Message");
@@ -100,6 +98,7 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 
 		browse = new Button("Browse");
 		browse.setOnAction(buttonHandler);
+		browse.getStyleClass().add("but");
 		this.add(browse,1,4,1,1);
 
 		Label nowPlaying = new Label("Now Playing"); //make this its own component later
@@ -128,6 +127,7 @@ public class Screen_1 extends GridPane implements ScreenInterface{
         if(event.getSource()==browse){
         	temp.setScene(ScreenBuilder.buildScreen1a());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
