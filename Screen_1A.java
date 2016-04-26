@@ -1,5 +1,7 @@
 package screen;
 
+import control.Credits;
+import control.CreditsIF;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -10,21 +12,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 public class Screen_1A extends GridPane implements ScreenInterface {
-	
-	private static Screen_1A instance; 
+
+	private static Screen_1A instance;
+
 	Button back;
-	
+
 	Screen_1A(){
 		setConstraints();
 		makeComponents();
 	}
-	
+
 	public static ScreenInterface getInstance(){
 		if(instance != null){
 			return instance;
@@ -34,25 +39,25 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 			return instance;
 		}
 	}
-	
+
 	private void setConstraints(){
 		ColumnConstraints col0 = new ColumnConstraints();
 		col0.setPercentWidth(20);
 		ColumnConstraints col1 = new ColumnConstraints();
 		col1.setPercentWidth(80);
-		
+
 		RowConstraints row0 = new RowConstraints();
 		row0.setPercentHeight(10);
 		RowConstraints row1 = new RowConstraints();
 		row1.setPercentHeight(80);
 		RowConstraints row2 = new RowConstraints();
 		row2.setPercentHeight(10);
-		
+
 		this.getColumnConstraints().addAll(col0, col1);
 		this.getRowConstraints().addAll(row0, row1, row2);
-		
+
 	}
-	
+
 	private void makeScale(Button b){
 		b.setMinHeight(0);
 		b.setMaxHeight(Double.MAX_VALUE);
@@ -67,17 +72,18 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 	}
 
 	private void makeComponents(){
+		this.setOnKeyPressed(keyHandler);
 		back = new Button("Back");
 		back.setOnAction(buttonHandler);
-		this.add(back,0,0);	
-		
+		this.add(back,0,0);
+
 		TextField search = new TextField();
 		search.setPromptText("Search...");
 		//Listener
 		makeScale(search);
 		this.add(search,1,0);
-		
-		
+
+
 		GridPane atoz = new GridPane();
 		ColumnConstraints third = new ColumnConstraints();
 		third.setPercentWidth(33);
@@ -89,20 +95,20 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 			Label l = new Label(((char)('A'+i))+"");
 			setHalignment(l, HPos.CENTER);
 			//AddInvisButtonsHere
-			atoz.add(l , 1, i);		
+			atoz.add(l , 1, i);
 		}
 		this.add(atoz,0,1);
-		
-		
+
+
 		ScrollPane songlist = new ScrollPane();
 		songlist.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		songlist.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		this.add(songlist,1,1);
-		
+
 		Label nowplaying = new Label ("Now Playing will go here");
 		setHalignment(nowplaying, HPos.CENTER);
 		this.add(nowplaying, 0, 2, 2, 1);
-		
+
 	}
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
@@ -110,13 +116,43 @@ public class Screen_1A extends GridPane implements ScreenInterface {
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen1());
- 
+
         }
         temp.setFullScreen(true);
         temp.show();
         }
     };
-	
+
+    EventHandler<InputEvent> keyHandler = new EventHandler<InputEvent>() {
+        @Override
+        public void handle(InputEvent event) {
+        	CreditsIF control = Credits.getInstance();
+        	if(event instanceof KeyEvent){
+        		KeyEvent key = (KeyEvent) event;
+        		switch(key.getCode()){
+        			case X:
+        				System.out.println("Attempting to insert 5 cents");
+        				control.insertMoney(0.05);
+        				break;
+        			case C:
+        				control.insertMoney(0.1);
+        				break;
+        			case V:
+        				control.insertMoney(0.25);
+        				break;
+        			case B:
+        				control.insertMoney(1.0);
+        				break;
+        			case N:
+        				control.insertMoney(5.0);
+        				break;
+        			default:
+						break;
+
+        		}
+        	}
+        }
+    };
 
 
 }

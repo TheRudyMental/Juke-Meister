@@ -2,30 +2,37 @@ package screen;
 
 
 
+import control.CreditObserver;
+import control.Credits;
+import control.CreditsIF;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class Screen_1 extends GridPane implements ScreenInterface{
+public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver{
 
 	private static Screen_1 instance;
-	
+	/*Button used for browsing*/
 	private Button browse;
+
+	Label credit;
 
 	Screen_1() {
 		setConstraints();
 		makeComponents();
+		Credits.register(this);
 	}
 
 	/**
@@ -79,13 +86,15 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 	/**
 	 * This method defines the components on the screen and adds them to it.
 	 */
-	@SuppressWarnings("unchecked")
 	private void makeComponents(){
+		this.setOnKeyPressed(keyHandler);
 		Label vName = new Label("Venue Name");
 		Label message = new Label("Message");
+	    credit = new Label("Credits: ");
 
 		this.add(vName,1,0,1,1);
 		this.add(message,1,1,1,1);
+		this.add(credit, 1, 2, 1, 1);
 
 
 		Label pop = new Label("Popular Songs");
@@ -93,8 +102,8 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 
 		this.add(pop,0,2,1,1);
 		this.add(newSongs,2,2,1,1);
-		
-		
+
+
 
 		//The list stuff will go here, empty for now
 
@@ -133,6 +142,10 @@ public class Screen_1 extends GridPane implements ScreenInterface{
         }
     };
 
+    /**
+     * sets all of the elements to be aligned to the center of the row
+     * 		and column that it is in
+     */
 	void setCenterAlignment(){
 		ObservableList<Node> elements = this.getChildren();
 		for(Node i:elements){
@@ -140,4 +153,40 @@ public class Screen_1 extends GridPane implements ScreenInterface{
 		}
 	}
 
+	EventHandler<InputEvent> keyHandler = new EventHandler<InputEvent>() {
+        @Override
+        public void handle(InputEvent event) {
+        	CreditsIF control = Credits.getInstance();
+        	if(event instanceof KeyEvent){
+        		KeyEvent key = (KeyEvent) event;
+        		switch(key.getCode()){
+        			case X:
+        				System.out.println("Attempting to insert 5 cents");
+        				control.insertMoney(0.05);
+        				break;
+        			case C:
+        				control.insertMoney(0.1);
+        				break;
+        			case V:
+        				control.insertMoney(0.25);
+        				break;
+        			case B:
+        				control.insertMoney(1.0);
+        				break;
+        			case N:
+        				control.insertMoney(5.0);
+        				break;
+        			default:
+						break;
+
+        		}
+        	}
+        }
+    };
+
+	@Override
+	public void update(int credits) {
+		credit.setText("Credits: " + credits);
+		this.add(credit, 1, 2);
+	}
 }
