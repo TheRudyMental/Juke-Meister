@@ -65,10 +65,12 @@ public class Screen_2A1 extends GridPane implements ScreenInterface {
 		back = new Button("Back");
 		setup(back);
 		back.setOnAction(buttonHandler);
+		back.getStyleClass().add("but");
 		this.add(back, 0, 0);
 		
 		Label text = new Label("Table of Previous Weeks");
 		GridPane.setHalignment(text, HPos.CENTER);
+		text.getStyleClass().add("label");
 		this.add(text, 1, 1);
 		
 		TableView<Object> statistics = new TableView<Object>();
@@ -90,6 +92,7 @@ public class Screen_2A1 extends GridPane implements ScreenInterface {
         	temp.setScene(ScreenBuilder.buildScreen2a());
  
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
