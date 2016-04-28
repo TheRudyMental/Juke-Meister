@@ -60,6 +60,7 @@ public class Main extends Application {
         		
         	}
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
