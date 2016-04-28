@@ -21,13 +21,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver{
+public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver,control.VenueAndMessageListener{
 
 	private static Screen_1 instance;
 	/*Button used for browsing*/
 	private Button browse;
-
-	Label credit;
+	/*Label to tell user the amount of credits they have*/
+	private Label credit;
+	/*Label to hold the venue name, blank by default*/
+	private Label vName;
+	/*Label to hold message entered by admin, blank by default*/
+	private Label message;
 
 	Screen_1() {
 		setConstraints();
@@ -87,9 +91,10 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 	 * This method defines the components on the screen and adds them to it.
 	 */
 	private void makeComponents(){
+		Screen_2D1.register(this);
 		this.setOnKeyPressed(keyHandler);
-		Label vName = new Label("Venue Name");
-		Label message = new Label("Message");
+		vName = new Label("Venue Name");//set blank
+		message = new Label("Message");//set blank
 	    credit = new Label("Credits: ");
 
 		this.add(vName,1,0,1,1);
@@ -157,11 +162,11 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
         @Override
         public void handle(InputEvent event) {
         	CreditsIF control = Credits.getInstance();
+        	System.out.println("Credit Price is: " + ((Credits) control).getPrice());
         	if(event instanceof KeyEvent){
         		KeyEvent key = (KeyEvent) event;
         		switch(key.getCode()){
         			case X:
-        				System.out.println("Attempting to insert 5 cents");
         				control.insertMoney(0.05);
         				break;
         			case C:
@@ -187,6 +192,17 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 	@Override
 	public void update(int credits) {
 		credit.setText("Credits: " + credits);
-		this.add(credit, 1, 2);
+	}
+
+	@Override
+	public void updateVenueName(String newName) {
+		System.out.println("Venue name is now: " + newName);
+		vName.setText(newName);
+	}
+
+	@Override
+	public void updateMessage(String newMessage) {
+		System.out.println("Message is now: " + newMessage);
+		message.setText(newMessage);
 	}
 }

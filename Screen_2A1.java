@@ -1,4 +1,4 @@
-package screen;
+package Screen;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

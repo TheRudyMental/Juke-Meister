@@ -118,6 +118,7 @@ public class Screen_1A extends GridPane implements ScreenInterface {
         	temp.setScene(ScreenBuilder.buildScreen1());
 
         }
+		temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }

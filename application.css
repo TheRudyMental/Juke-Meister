@@ -1,0 +1,18 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.root { -fx-background-color: linear-gradient(black, gray)}
+.but{
+
+ 	-fx-background-color: linear-gradient(#47f7eb 25%,#c3f7f3 100%);
+ 	-fx-border-radius: 60px;
+ 	-fx-font-family: Arial;
+ 	-fx-font-size: 20px;
+ 	-fx-padding: 10px 20px 10px 20px;
+}
+.text{
+	-fx-background: linear-gradient(#47f7eb 0%, #c3f7f3 75%);
+	-fx-border-radius: 60px; 
+	-fx-font-family: Arial;
+}
+
+

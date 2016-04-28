@@ -1,5 +1,10 @@
 package screen;
 
+import java.util.ArrayList;
+
+import control.Credits;
+import control.CreditsIF;
+import control.VenueAndMessageListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -8,8 +13,11 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -17,26 +25,42 @@ import javafx.stage.Stage;
  * @author Grant Brown
  * This class is to define the advanced options screen for the screen saver
  */
-public class Screen_2D1 extends BorderPane implements ScreenInterface{
+public class Screen_2D1 extends BorderPane implements ScreenInterface,control.VenueAndMessageSubject{
 
 	private static Screen_2D1 instance;
-	Button back;
+	/*Back button for this screen*/
+	private Button back;
+	/*Text field for the venue name*/
+	private TextField vName;
+	/*Text field for the message to be displayed*/
+	private TextField message;
 
+	private static ArrayList<VenueAndMessageListener> o;
 	Screen_2D1() {
 		makeComponents();
+		o = new ArrayList<VenueAndMessageListener>();
 	}
 
+	/**
+	 * This method returns the singleton instance of this screen
+	 * @return the singleton instance of this screen
+	 */
 	public static ScreenInterface getInstance() {
-		if(instance != null){
-			return instance;
-		}
-		else{
+		if(instance == null){
 			instance = new Screen_2D1();
 			return instance;
 		}
+		else{
+			return instance;
+		}
 	}
 
+	/**
+	 * Creates all the components on the screen at once
+	 */
 	private void makeComponents(){
+		this.setOnKeyPressed(keyHandler);
+
 		back = new Button("Back");
 		back.setMaxSize(75, Integer.MAX_VALUE);
 		back.setOnAction(buttonHandler);
@@ -49,10 +73,10 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface{
 		TextField time = new TextField();
 		time.setPromptText("Enter Timer (In Minutes):");
 
-		TextField vName = new TextField();
+		vName = new TextField();
 		vName.setPromptText("Enter Venue Name:");
 
-		TextField message = new TextField();
+		message = new TextField();
 		message.setPromptText("Enter Message:");
 
 		fields.getChildren().addAll(time,vName,message);
@@ -73,18 +97,63 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface{
 		this.setCenter(contain);
 
 
-
 	}
+
+	/**
+	 * Set up the keyboard for all the text fields
+	 */
+	public void setUpKeyboard(){
+		vName.getProperties().put("vkType", "full");
+		message.getProperties().put("vkyType", "full");
+	}
+	/**
+	 * Handler for the buttons on screen
+	 */
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
         if(event.getSource()==back){
-        	temp.setScene(ScreenBuilder.buildScreen2());
+        	temp.setScene(ScreenBuilder.buildScreen2d());
         }
         temp.setFullScreen(true);
         temp.show();
         }
     };
+
+    EventHandler<KeyEvent> keyHandler = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+        		if(event.getCode() == KeyCode.ENTER){
+        			System.out.println("Enter Pressed");
+        			System.out.println("notifying");
+        			notifyListeners(vName.getText(),message.getText());
+        		}
+        }
+    };
+
+    /**
+     * @see VenueAndMessageSubject
+     */
+	@Override
+	public void notifyListeners(String venueName, String message) {
+		for(VenueAndMessageListener vml : o){
+			System.out.println("Notifying all ");
+			if(venueName != null){
+				System.out.println("Setting Venue Name");
+				vml.updateVenueName(venueName);
+			}
+			if(message != null){
+				System.out.println("Setting message");
+				vml.updateMessage(message);
+			}
+		}
+	}
+
+	public static void register(VenueAndMessageListener vml){
+		getInstance();
+		System.out.println("Adding");
+		o.add(vml);
+	}
 
 }

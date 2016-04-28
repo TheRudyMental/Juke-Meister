@@ -48,7 +48,7 @@ public class Credits implements CreditsIF, CreditSubject{
 	}
 
 	public void setPrice(int newPrice){
-		songPrice = newPrice;
+		creditPrice = newPrice;
 	}
 
 	public void setBuyBonus(int newBonus){
@@ -106,7 +106,7 @@ public class Credits implements CreditsIF, CreditSubject{
 
 	@Override
 	public void notifyObservers() {
-		for(CreditObserver ob: this.o){
+		for(CreditObserver ob: Credits.o){
 			ob.update((currentCredits+bonusCredits));
 		}
 	}
@@ -121,5 +121,9 @@ public class Credits implements CreditsIF, CreditSubject{
 			instance = new Credits();
 		}
 		return instance;
+	}
+
+	public double getPrice(){
+		return creditPrice;
 	}
 }

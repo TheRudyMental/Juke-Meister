@@ -79,7 +79,7 @@ public class UIBuilder {
 	}
 	public static Screen_2D1 getScreen_2D1(){
 		if(screen2d1 == null)
-			screen2d1 = new Screen_2D1();
+			screen2d1 = (Screen_2D1) Screen_2D1.getInstance();
 		return screen2d1;
 	}
 
