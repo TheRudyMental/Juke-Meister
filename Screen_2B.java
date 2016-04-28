@@ -77,6 +77,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 		back.setOnAction(buttonHandler);
 		back.setMinSize(0, 0);
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back.getStyleClass().add("but");
 		this.add(back,0,0);
 	
 		
@@ -105,6 +106,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 		single.setMinSize(0, 0);
 		single.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		single.setWrapText(true);
+		single.getStyleClass().add("but");
 		gridpane2.add(single,0,0);
 		
 		
@@ -113,6 +115,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 		album.setMinSize(0, 0);
 		album.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		album.setWrapText(true);
+		album.getStyleClass().add("but").
 		gridpane2.add(album,0,2);
 		
 		
@@ -121,6 +124,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 		song.setMinSize(0, 0);
 		song.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		song.setWrapText(true);
+		song.getStyleClass().add("but")
 		gridpane2.add(song,0,4);
 		
 		
@@ -142,6 +146,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
         if(event.getSource()==album){
         	temp.setScene(ScreenBuilder.buildScreen2b2());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
