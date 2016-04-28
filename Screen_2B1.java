@@ -30,6 +30,7 @@ public class Screen_2B1 extends Screen_add implements ScreenInterface{
 		addSingle.setPrefSize(400, 75);
 		addSingle.setMinSize(0, 0);
 		addSingle.setOnAction(add);
+		addSingle.getStyleClass().add("but");
 	}
 
 	EventHandler<ActionEvent> add = new EventHandler<ActionEvent>() {
