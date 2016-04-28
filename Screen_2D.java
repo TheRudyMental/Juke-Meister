@@ -62,6 +62,7 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 		back = new Button("Back");
 		back.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
 		back.setOnAction(buttonHandler);
+		back.getStyleClass().add("but");
 		this.add(back, 0, 0);
 
 
@@ -69,19 +70,24 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 
 		HBox attract = new HBox();
 		Label at = new Label("Attract: ");
+		at.getStyleClass().add("label")
 		Button toggle1 = new Button("On/Off"); //TODO: add toggle functionality later
 		toggle1.setPrefSize(200,25);
+		toggle1.getStyleClass().add("but");
 		attract.getChildren().addAll(at,toggle1);
 		attract.setSpacing(30);
 
 		TextField minutes = new TextField();
 		minutes.setPromptText("Enter Timer (In minutes):");//TODO: add data entry functionality
 		minutes.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+		minutes.getStyleClass().add("text");
 
 		HBox screenSaver = new HBox();
 		Label screen = new Label("Screen Saver: ");
+		screen.getStyleClass().add("label");
 		Button toggle2 = new Button("On/Off");
 		toggle2.setPrefSize(200, 25);
+		toggle2.getStyleClass().add("but")
 		screenSaver.getChildren().addAll(screen,toggle2);
 		screenSaver.setSpacing(30);
 
@@ -89,6 +95,7 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 		advanced.setWrapText(true);
 		advanced.setPrefSize(150,100);
 		advanced.setOnAction(buttonHandler);
+		advanced.getStyleClass().add("but");
 
 		VBox whole = new VBox();
 		whole.getChildren().addAll(attract,minutes,screenSaver,advanced);
@@ -110,6 +117,7 @@ public class Screen_2D extends GridPane implements ScreenInterface{
         if(event.getSource()==advanced){
         	temp.setScene(ScreenBuilder.buildScreen2d1());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
