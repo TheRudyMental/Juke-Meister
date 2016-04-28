@@ -142,6 +142,7 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
         if(event.getSource()==browse){
         	temp.setScene(ScreenBuilder.buildScreen1a());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
