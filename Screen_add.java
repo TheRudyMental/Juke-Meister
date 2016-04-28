@@ -62,11 +62,11 @@ public class Screen_add extends GridPane implements ScreenInterface {
 	}
 	private void makeComponents(){
 		back = new Button("Back");
-
 		GridPane.setHalignment(back, HPos.LEFT);
 		GridPane.setValignment(back, VPos.TOP);
 		back.setMinSize(0, 0);
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back.getStyleClass().add("but");
 		this.add(back,0,0,1,1);
 
 		title = new TextField();
@@ -74,15 +74,20 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		TextField year = new TextField();
 
 		title.setPromptText("Enter Title");
+		title.getStyleClass().add("text");
 		artist.setPromptText("Enter Artist");
+		artist.getStyleclass().add("text");
 		year.setPromptText("Enter Release Year");
+		year.getStyleClass().add("text");
 
 		this.add(title, 1,2,1,1);
 		this.add(artist, 1,3,1,1);
 		this.add(year, 1,4,1,1);
 
 		Label pictureLabel = new Label("Picture:");
+		pictureLabel.getStyleClass().add("label");
 		Label fileLabel = new Label("File:");
+		fileLabel.getStyleClass().add("label");
 
 		this.add(pictureLabel, 0,5,1,1);
 		this.add(fileLabel, 0,6,1,1);
@@ -90,7 +95,9 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		GridPane.setHalignment(fileLabel, HPos.RIGHT);
 
 		Button pictureButton = new Button("Browse");
+		pictureButton.getStyleClass().add("but");
 		Button fileButton = new Button("Browse");
+		fileButton.getStyleClass().add("but");
 
 		pictureButton.setPrefSize(200, 50);
 		pictureButton.setMinSize(0, 0);
@@ -109,6 +116,7 @@ public class Screen_add extends GridPane implements ScreenInterface {
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen2b());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
