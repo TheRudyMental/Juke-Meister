@@ -2,9 +2,13 @@ package control;
 
 import Database.SongIF;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 /*
  * This class is to define the user interface elements that the songs will
  * 	be made of
@@ -26,12 +30,25 @@ public class SongUI extends HBox implements SongUIIF{
 		artist= new Label();
 		year = new Label();
 		this.getChildren().addAll(title,artist,year);
-		this.setSpacing(30);
+		this.setSpacing(300);
 		setText(song.getTitle(), song.getArtist(), song.getYear());
 		this.setOnMousePressed(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				//TODO: Add to prompt for play song
+				PlayControlInf play = PlayControl.getInstance();
+				CreditsIF check = Credits.getInstance();
+				if(check.getTotalCredits() <= 0){
+					Alert alert = new Alert(AlertType.INFORMATION);
+	        		alert.setTitle("No Credits!");
+	        		alert.setContentText("You must have credit in the" +
+	        							" machine before playing a song.");
+	        		alert.initOwner((Stage)((Node) event.getSource()).getScene().getWindow());
+	        		alert.showAndWait();
+				}
+				else{
+					play.playSong(song);
+					System.out.println("Playing Song");
+				}
 			}
 		});
 	}
