@@ -1,5 +1,7 @@
 package screen;
 
+import java.io.File;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -12,7 +14,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 /**
  *
  * @author JamieBurchette
@@ -23,9 +28,14 @@ import javafx.stage.Stage;
 public class Screen_add extends GridPane implements ScreenInterface {
 	private static Screen_add instance;
 	private Button back;
+	private Button pictureButton;
+	private Button fileButton;
+	private FileChooser fileChooser;
 	protected TextField title;
 	protected TextField artist;
 	protected TextField year;
+	protected File picture;
+	protected File file;
 
 	protected Screen_add() {
 		setConstraints();
@@ -68,6 +78,9 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		back.getStyleClass().add("but");
 		this.add(back,0,0,1,1);
+		
+		fileChooser = new FileChooser();
+   	 	fileChooser.setTitle("Open Resource File");
 
 		title = new TextField();
 		artist = new TextField();
@@ -94,10 +107,12 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		GridPane.setHalignment(pictureLabel, HPos.RIGHT);
 		GridPane.setHalignment(fileLabel, HPos.RIGHT);
 
-		Button pictureButton = new Button("Browse");
+		pictureButton = new Button("Browse");
 		pictureButton.getStyleClass().add("but");
-		Button fileButton = new Button("Browse");
+		pictureButton.setOnAction(buttonHandler);
+		fileButton = new Button("Browse");
 		fileButton.getStyleClass().add("but");
+		fileButton.setOnAction(buttonHandler);
 
 		pictureButton.setPrefSize(200, 50);
 		pictureButton.setMinSize(0, 0);
@@ -113,14 +128,25 @@ public class Screen_add extends GridPane implements ScreenInterface {
         @Override
         public void handle(ActionEvent event) {
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
-        if(event.getSource()==back){
+        if(event.getSource()== back){
         	temp.setScene(ScreenBuilder.buildScreen2b());
+        	temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            temp.setFullScreen(true);
+            temp.show();
         }
-        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        temp.setFullScreen(true);
-        temp.show();
+        else if(event.getSource() == fileButton){
+        	 fileChooser.getExtensionFilters().addAll(
+        	         new ExtensionFilter("Audio Files", "*.wav", "*.mp3"));
+        	 file = fileChooser.showOpenDialog(temp);
+        	 
         }
+        else if(event.getSource() == pictureButton){
+        	 fileChooser.getExtensionFilters().addAll(
+        	         new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
+        	 picture = fileChooser.showOpenDialog(temp);
+        }
+        }
+        
     };
-
-
 }
+
