@@ -79,8 +79,9 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 
 		TextField search = new TextField();
 		search.setPromptText("Search...");
-		//Listener
 		makeScale(search);
+		search.getStyleClass.add("text");
+		//query
 		this.add(search,1,0);
 
 
@@ -94,6 +95,7 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 			atoz.getRowConstraints().add(arow);
 			Label l = new Label(((char)('A'+i))+"");
 			setHalignment(l, HPos.CENTER);
+			l.getStyleClass.add("label");
 			//AddInvisButtonsHere
 			atoz.add(l , 1, i);
 		}
