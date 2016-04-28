@@ -22,5 +22,7 @@ public interface CreditsIF {
 	
 	public void removeCredits();
 	
+	public void insertMoney(double d);
+	
 	public void refund();
 }

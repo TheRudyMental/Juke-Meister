@@ -111,7 +111,7 @@ public class Screen_2B3 extends GridPane implements ScreenInterface {
 
 		Button delete = new Button("Delete");
 		makeScale(delete);
-		delete.getStyleClass().add("but")
+		delete.getStyleClass().add("but");
 		this.add(delete, 2, 2);
 
 	}

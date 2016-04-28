@@ -3,8 +3,8 @@ package screen;
 import java.util.ArrayList;
 
 import control.Credits;
-import control.CreditsIF;
 import control.VenueAndMessageListener;
+import controller.CreditsIF;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -81,7 +81,7 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
 
 		message = new TextField();
 		message.setPromptText("Enter Message:");
-		message.getStyleClass.add("text");
+		message.getStyleClass().add("text");
 
 		fields.getChildren().addAll(time,vName,message);
 		fields.setSpacing(20);

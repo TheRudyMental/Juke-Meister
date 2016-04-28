@@ -10,9 +10,12 @@
  	-fx-padding: 10px 20px 10px 20px;
 }
 .text{
-	-fx-background: linear-gradient(#47f7eb 0%, #c3f7f3 75%);
+	-fx-background-color: #c3f7f3;
 	-fx-border-radius: 60px; 
 	-fx-font-family: Arial;
 }
-
+.label{
+	-fx-text-fill: #77ddff;
+	-fx-font-size: 20pt
+}
 

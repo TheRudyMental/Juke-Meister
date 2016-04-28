@@ -43,7 +43,6 @@ public class UIBuilder {
 			screen2a1 = new Screen_2A1();
 		return screen2a1;
 	}
-	//Screen_2B
 	public static Screen_2B getScreen_2B(){
 		if(screen2b == null){
 			screen2b = new Screen_2B();

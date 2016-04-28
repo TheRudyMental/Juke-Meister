@@ -4,7 +4,7 @@ package screen;
 
 import control.CreditObserver;
 import control.Credits;
-import control.CreditsIF;
+import controller.CreditsIF;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -94,8 +94,11 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 		Screen_2D1.register(this);
 		this.setOnKeyPressed(keyHandler);
 		vName = new Label("Venue Name");//set blank
+		vName.getStyleClass().add("label");
 		message = new Label("Message");//set blank
+		message.getStyleClass().add("label");
 	    credit = new Label("Credits: ");
+	    credit.getStyleClass().add("label");
 
 		this.add(vName,1,0,1,1);
 		this.add(message,1,1,1,1);
@@ -114,7 +117,7 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 
 		browse = new Button("Browse");
 		browse.setOnAction(buttonHandler);
-		browse.getStyleClass().add("but")
+		browse.getStyleClass().add("but");
 		this.add(browse,1,4,1,1);
 
 		Label nowPlaying = new Label("Now Playing"); //make this its own component later

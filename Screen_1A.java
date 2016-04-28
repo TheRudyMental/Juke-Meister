@@ -1,7 +1,7 @@
 package screen;
 
 import control.Credits;
-import control.CreditsIF;
+import controller.CreditsIF;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -74,13 +74,15 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 	private void makeComponents(){
 		this.setOnKeyPressed(keyHandler);
 		back = new Button("Back");
+		makeScale(back);
 		back.setOnAction(buttonHandler);
+		back.getStyleClass().add("but");
 		this.add(back,0,0);
 
 		TextField search = new TextField();
 		search.setPromptText("Search...");
 		makeScale(search);
-		search.getStyleClass.add("text");
+		search.getStyleClass().add("text");
 		//query
 		this.add(search,1,0);
 
@@ -95,7 +97,7 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 			atoz.getRowConstraints().add(arow);
 			Label l = new Label(((char)('A'+i))+"");
 			setHalignment(l, HPos.CENTER);
-			l.getStyleClass.add("label");
+			l.getStyleClass().add("label");
 			//AddInvisButtonsHere
 			atoz.add(l , 1, i);
 		}

@@ -1,4 +1,4 @@
-package Screen;
+package screen;
  
 
  
@@ -109,7 +109,7 @@ import javafx.stage.Stage;
         	vbox.setAlignment(Pos.CENTER);
         	
  		Label volume = new Label("Volume");
- 		volume.getStyleClass().add("label")
+ 		volume.getStyleClass().add("label");
  		vbox.getChildren().add(volume);
  
  		Slider volumeSlider = new Slider();        
@@ -146,7 +146,7 @@ import javafx.stage.Stage;
 		stat.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		stat.setWrapText(true);
  		stat.setOnAction(buttonHandler);
- 		stat.getStyleClass().add("but")
+ 		stat.getStyleClass().add("but");
  		gridpane2.add(stat,0,0);
  
  		lib = new Button("Song Library");
@@ -154,7 +154,7 @@ import javafx.stage.Stage;
  		lib.setMinSize(0, 0);
  		lib.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		lib.setWrapText(true);
- 		lib.getStyleClass().add("but")
+ 		lib.getStyleClass().add("but");
  		gridpane2.add(lib,2,0);
  
  		credit = new Button("Credit Options");
@@ -162,7 +162,7 @@ import javafx.stage.Stage;
  		credit.setMinSize(0, 0);
  		credit.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		credit.setWrapText(true);
- 		credit.getStyleClass().add("but")
+ 		credit.getStyleClass().add("but");
  		gridpane2.add(credit,0,2);
  
  		extra = new Button("Extra Options");
@@ -170,7 +170,7 @@ import javafx.stage.Stage;
  		extra.setMinSize(0, 0);
  		extra.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		extra.setWrapText(true);
- 		extra.getStyleClass().add("but")
+ 		extra.getStyleClass().add("but");
  		gridpane2.add(extra,2,2);
  		this.add(gridpane2,1,1);
  

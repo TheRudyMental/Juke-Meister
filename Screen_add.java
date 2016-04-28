@@ -76,7 +76,7 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		title.setPromptText("Enter Title");
 		title.getStyleClass().add("text");
 		artist.setPromptText("Enter Artist");
-		artist.getStyleclass().add("text");
+		artist.getStyleClass().add("text");
 		year.setPromptText("Enter Release Year");
 		year.getStyleClass().add("text");
 

@@ -1,4 +1,4 @@
-package Screen;
+package screen;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -70,7 +70,7 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 
 		HBox attract = new HBox();
 		Label at = new Label("Attract: ");
-		at.getStyleClass().add("label")
+		at.getStyleClass().add("label");
 		Button toggle1 = new Button("On/Off"); //TODO: add toggle functionality later
 		toggle1.setPrefSize(200,25);
 		toggle1.getStyleClass().add("but");
@@ -87,7 +87,7 @@ public class Screen_2D extends GridPane implements ScreenInterface{
 		screen.getStyleClass().add("label");
 		Button toggle2 = new Button("On/Off");
 		toggle2.setPrefSize(200, 25);
-		toggle2.getStyleClass().add("but")
+		toggle2.getStyleClass().add("but");
 		screenSaver.getChildren().addAll(screen,toggle2);
 		screenSaver.setSpacing(30);
 

@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 public class Song implements SongIF {
-	
+
 	private String title;
 	private String artist;
 	private int year;
@@ -15,9 +15,9 @@ public class Song implements SongIF {
 	private int weekCounter;
 	private int monthCounter;
 	private Timestamp dateAdded;
-	
-	
-	protected Song(String title, String artist, int year, File songFile, File picture){
+
+
+	public Song(String title, String artist, int year, File songFile, File picture){
 		this.title = title;
 		this.artist = artist;
 		this.year = year;
@@ -28,15 +28,15 @@ public class Song implements SongIF {
 		Calendar calendar = Calendar.getInstance();
 		dateAdded = new Timestamp(calendar.getTimeInMillis());
 	}
-	
+
 	protected Song(String title, String artist, File songFile, File picture){
 		this(title, artist, 0, songFile, picture);
 	}
-	
+
 	protected Song(String title, String artist, int year, File songFile){
 		this(title, artist, year, songFile, null);
 	}
-	
+
 	protected Song(String title, String artist, File songFile){
 		this(title, artist, 0, songFile, null);
 	}
@@ -80,7 +80,7 @@ public class Song implements SongIF {
 	public int getMonthCount() {
 		return monthCounter;
 	}
-	
+
 	@Override
 	public long getDateAdded(){
 		return dateAdded.getTime();
@@ -131,17 +131,17 @@ public class Song implements SongIF {
 		weekCounter++;
 		monthCounter++;
 	}
-	
+
 	@Override
 	public void resetWeek(){
 		weekCounter = 0;
 	}
-	
+
 	@Override
 	public void resetMonth(){
 		monthCounter = 0;
 	}
-	
+
 	@Override
 	public boolean equals(String title) {
 		if(title.equals(this.title)){
@@ -152,5 +152,5 @@ public class Song implements SongIF {
 		}
 	}
 
-	
+
 }

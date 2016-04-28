@@ -1,4 +1,4 @@
-package Screen;
+package screen;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -93,10 +93,10 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 		back.setOnAction(buttonHandler);
 				
 		Label topTracks = new Label("Top Tracks");
-		topTracks.getStyleClass().add("label")
+		topTracks.getStyleClass().add("label");
 		
 		Label leastPlayed = new Label("Least Played");
-		leastPlayed.getStyleClass().add("label")
+		leastPlayed.getStyleClass().add("label");
 
 		this.add(topTracks,1,1,1,1);
 		this.add(leastPlayed,2,1,1,1);

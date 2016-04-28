@@ -2,26 +2,14 @@ package application;
 
 
 
-import Screen.ScreenBuilder;
-import Screen.Screen_1A;
-import Screen.Screen_2A;
-import Screen.Screen_2A1;
-import Screen.Screen_2B1;
-import Screen.Screen_2B2;
-import Screen.Screen_2C;
-import Screen.Screen_2D;
-import Screen.Screen_2D1;
-import Screen.UIBuilder;
+import screen.ScreenBuilder;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.InputEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Pane;
 
 
 public class Main extends Application {
