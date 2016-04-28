@@ -114,6 +114,7 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 
 		browse = new Button("Browse");
 		browse.setOnAction(buttonHandler);
+		browse.getStyleClass().add("but")
 		this.add(browse,1,4,1,1);
 
 		Label nowPlaying = new Label("Now Playing"); //make this its own component later
