@@ -64,6 +64,7 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
 		back = new Button("Back");
 		back.setMaxSize(75, Integer.MAX_VALUE);
 		back.setOnAction(buttonHandler);
+		back.getStyleClass().add("but");
 		this.setTop(back);
 
 
@@ -72,12 +73,15 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
 		VBox fields = new VBox();//box to put text fields in
 		TextField time = new TextField();
 		time.setPromptText("Enter Timer (In Minutes):");
+		time.getStyleClass().add("text");
 
 		vName = new TextField();
 		vName.setPromptText("Enter Venue Name:");
+		vName.getStyleClass().add("text");
 
 		message = new TextField();
 		message.setPromptText("Enter Message:");
+		message.getStyleClass.add("text");
 
 		fields.getChildren().addAll(time,vName,message);
 		fields.setSpacing(20);
@@ -86,6 +90,7 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
 		HBox picture = new HBox(); // thing to hold picture label and button
 		Label pic = new Label("Picture: ");
 		Button fileUpload = new Button("Browse");
+		fileUpload.getStyleClass().add("but");
 
 		picture.getChildren().addAll(pic,fileUpload);
 		picture.setSpacing(75);
@@ -116,6 +121,7 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen2d());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
