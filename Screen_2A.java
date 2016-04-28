@@ -89,10 +89,14 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 		GridPane.setValignment(back, VPos.TOP);
 		back.setMinSize(0, 0);
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		back.getStyleClass().add("but");
 		back.setOnAction(buttonHandler);
 				
 		Label topTracks = new Label("Top Tracks");
+		topTracks.getStyleClass().add("label")
+		
 		Label leastPlayed = new Label("Least Played");
+		leastPlayed.getStyleClass().add("label")
 
 		this.add(topTracks,1,1,1,1);
 		this.add(leastPlayed,2,1,1,1);
@@ -110,6 +114,7 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 		}
 		
 		TextField currentFunds = new TextField();
+		currentFunds.getStyleClass().add("text");
 		currentFunds.setEditable(false);
 
 		this.add(totalFunds,1,3,2,1);
@@ -125,6 +130,7 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 		table.setPrefSize(200, Double.MAX_VALUE);
 		table.setMinSize(0, 0);
 		table.setOnAction(buttonHandler);
+		table.getStyleClass().add("but");
 	}
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
@@ -137,6 +143,7 @@ public class Screen_2A extends GridPane implements ScreenInterface{
         if(event.getSource()==table){
         	temp.setScene(ScreenBuilder.buildScreen2a1());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
