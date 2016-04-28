@@ -83,20 +83,25 @@ public class Screen_2C extends GridPane implements ScreenInterface{
 		back.setMinSize(0, 0);
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		back.setOnAction(buttonHandler);
+		back.getStyleClass().add("but");
 		
 		TextField pricePerCredit = new TextField();
 		TextField buy = new TextField();
 		TextField get = new TextField();
 		
 		pricePerCredit.setPromptText("Price Per Credit");
+		pricePerCredit.getStyleClass().add("text");
 		buy.setPromptText("Buy:");
+		buy.getStyleClass().add("text");
 		get.setPromptText("Get:");
+		get.getStyleClass().add("text");
 		
 		this.add(pricePerCredit, 1,1,1,1);
 		this.add(buy, 1,3,1,1);
 		this.add(get, 1,4,1,1);
 		
 		Label creditsPerBonus = new Label("Credits Per Bonus:");
+		creditsPerBonus.getStyleClass().add("label");
 		GridPane.setHalignment(creditsPerBonus, HPos.CENTER);
 		this.add(creditsPerBonus, 1,2,1,1);
 		}
@@ -107,6 +112,7 @@ public class Screen_2C extends GridPane implements ScreenInterface{
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen2());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
