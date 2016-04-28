@@ -15,12 +15,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-public class Screen_2b3 extends GridPane implements ScreenInterface {
+public class Screen_2B3 extends GridPane implements ScreenInterface {
 
-	private static Screen_2b3 instance;
+	private static Screen_2B3 instance;
 	Button back;
 
-	Screen_2b3(){
+	Screen_2B3(){
 		setConstraints();
 		makeComponents();
 	}
@@ -30,7 +30,7 @@ public class Screen_2b3 extends GridPane implements ScreenInterface {
 			return instance;
 		}
 		else{
-			instance = new Screen_2b3();
+			instance = new Screen_2B3();
 			return instance;
 		}
 	}
@@ -71,17 +71,20 @@ public class Screen_2b3 extends GridPane implements ScreenInterface {
 	private void makeComponents(){
 		back = new Button("Back");
 		back.setOnAction(buttonHandler);
+		back.getStyleClass().add("but");
 		this.add(back,0,0);
 
 		TextField search = new TextField();
 		search.setPromptText("Search...");
 		//Listener
 		makeScale(search);
+		search.getStyleClass().add("but");
 		this.add(search,1,0);
 
 		Button sort = new Button("Sort by Popularity");
 		//add handler
 		makeScale(sort);
+		sort.getStyleClass().add("but");
 		this.add(sort, 2, 0);
 
 
@@ -108,6 +111,7 @@ public class Screen_2b3 extends GridPane implements ScreenInterface {
 
 		Button delete = new Button("Delete");
 		makeScale(delete);
+		delete.getStyleClass().add("but")
 		this.add(delete, 2, 2);
 
 	}
@@ -119,6 +123,7 @@ public class Screen_2b3 extends GridPane implements ScreenInterface {
         	temp.setScene(ScreenBuilder.buildScreen2b());
 
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
