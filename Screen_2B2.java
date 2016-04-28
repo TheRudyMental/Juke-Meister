@@ -15,6 +15,7 @@ public class Screen_2B2 extends Screen_add implements ScreenInterface {
 		GridPane.setHalignment(addAlbum, HPos.CENTER);
 		addAlbum.setPrefSize(400, 75);
 		addAlbum.setMinSize(0, 0);
+		addAlbum.getStyleClass().add("but");
 	}
 	public static ScreenInterface getInstance(){
 		if(instance != null){
