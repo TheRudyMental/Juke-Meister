@@ -50,19 +50,12 @@ import javafx.stage.Stage;
  	public static ScreenInterface getInstance(){
  
  		if(instance != null){
- 
  			return instance;
- 
  		}
- 
  		else{
- 
  			instance = new Screen_2();
- 
  			return instance;
- 
  		}
- 
  	}
  
  
@@ -78,47 +71,21 @@ import javafx.stage.Stage;
  	 */
  
  	private void setConstraints(){
- 
- 
- 
- 	
- 
  	     ColumnConstraints col1 = new ColumnConstraints();
- 
  	     col1.setPercentWidth(20);
- 
  	     ColumnConstraints col2 = new ColumnConstraints();
- 
  	     col2.setPercentWidth(60);
- 
  	     ColumnConstraints col3 = new ColumnConstraints();
- 
  	     col3.setPercentWidth(20);
- 
- 	     
- 
  	     this.getColumnConstraints().addAll(col1,col2,col3);
  
- 
- 
  	     RowConstraints row1 = new RowConstraints();
- 
  	     row1.setPercentHeight(10);
- 
  	     RowConstraints row2 = new RowConstraints();
- 
  	     row2.setPercentHeight(60);
- 
  	     RowConstraints row3 = new RowConstraints();
- 
  	     row3.setPercentHeight(30);
- 
- 	    
- 
  	     this.getRowConstraints().addAll(row1,row2,row3);
- 
- 
- 
  	}
 
  
@@ -131,43 +98,26 @@ import javafx.stage.Stage;
  
  	private void makeComponents(){
  
- 
- 
  		back = new Button("Back");
- 
  		back.setOnAction(buttonHandler);
- 
  		back.setMinSize(0, 0);
- 
  		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
- 
+ 		back.getStyleClass().add("but");
  		this.add(back,0,0);
  
- 	
- 
- 		
- 
- 		Label volume = new Label("Volume");
- 
  		VBox vbox = new VBox();
- 
-         vbox.setAlignment(Pos.CENTER);
- 
+        	vbox.setAlignment(Pos.CENTER);
+        	
+ 		Label volume = new Label("Volume");
+ 		volume.getStyleClass().add("label")
  		vbox.getChildren().add(volume);
  
- 	
- 
  		Slider volumeSlider = new Slider();        
- 
  		volumeSlider.setPrefWidth(70);
- 
  		volumeSlider.setMaxWidth(Double.MAX_VALUE);
-
  		volumeSlider.setMinWidth(0);
- 
- 		 
- 
  		vbox.getChildren().add(volumeSlider);
+ 		
  		VBox.setVgrow(vbox, Priority.ALWAYS);
  		this.add(vbox, 1, 2);
  
@@ -196,6 +146,7 @@ import javafx.stage.Stage;
 		stat.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		stat.setWrapText(true);
  		stat.setOnAction(buttonHandler);
+ 		stat.getStyleClass().add("but")
  		gridpane2.add(stat,0,0);
  
  		lib = new Button("Song Library");
@@ -203,6 +154,7 @@ import javafx.stage.Stage;
  		lib.setMinSize(0, 0);
  		lib.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		lib.setWrapText(true);
+ 		lib.getStyleClass().add("but")
  		gridpane2.add(lib,2,0);
  
  		credit = new Button("Credit Options");
@@ -210,6 +162,7 @@ import javafx.stage.Stage;
  		credit.setMinSize(0, 0);
  		credit.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		credit.setWrapText(true);
+ 		credit.getStyleClass().add("but")
  		gridpane2.add(credit,0,2);
  
  		extra = new Button("Extra Options");
@@ -217,6 +170,7 @@ import javafx.stage.Stage;
  		extra.setMinSize(0, 0);
  		extra.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		extra.setWrapText(true);
+ 		extra.getStyleClass().add("but")
  		gridpane2.add(extra,2,2);
  		this.add(gridpane2,1,1);
  
@@ -248,6 +202,7 @@ import javafx.stage.Stage;
         if(event.getSource()==extra){
         	temp.setScene(ScreenBuilder.buildScreen2d());
         }
+        temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
