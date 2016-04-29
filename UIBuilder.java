@@ -35,7 +35,7 @@ public class UIBuilder {
 	}
 	public static Screen_2A getScreen_2A(){
 		if(screen2a == null)
-			screen2a = new Screen_2A();
+			screen2a = (Screen_2A) Screen_2A.getInstance();
 		return screen2a;
 	}
 	public static Screen_2A1 getScreen_2A1(){

@@ -1,7 +1,12 @@
 package screen;
 
+import java.io.File;
+
 import control.Credits;
-import controller.CreditsIF;
+import control.CreditsIF;
+import control.Song;
+import control.SongUI;
+import control.SongUIIF;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -103,8 +108,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		}
 		this.add(atoz,0,1);
 
-
-		ScrollPane songlist = new ScrollPane();
+		SongUI test = SongUIIF.makeElement(new Song("Trap", "San Holo", 2014, new File("C:\\Users\\Grant\\workspace\\Juke-Meister\\src\\San Holo - Donkey Kong.mp3"), null));
+		ScrollPane songlist = new ScrollPane(test);
 		songlist.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		songlist.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		this.add(songlist,1,1);

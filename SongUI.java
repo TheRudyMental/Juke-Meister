@@ -1,6 +1,6 @@
 package control;
 
-import Database.SongIF;
+import control.SongIF;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;

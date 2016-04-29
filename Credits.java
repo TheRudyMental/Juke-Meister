@@ -2,7 +2,9 @@ package control;
 
 import java.util.ArrayList;
 
-import controller.CreditsIF;
+import control.CreditsIF;
+import screen.Screen_2A;
+import screen.UIBuilder;
 
 /**
  *
@@ -24,6 +26,7 @@ public class Credits implements CreditsIF, CreditSubject{
 	private int creditsEntered;
 	private double creditPrice;
 	private double currentMoney;
+	private double totalMoney;
 
 	private Credits(){
 		currentCredits = 0;
@@ -35,6 +38,7 @@ public class Credits implements CreditsIF, CreditSubject{
 		creditsEntered = 0;
 		creditPrice = 0.25;
 		currentMoney = 0;
+		totalMoney = 0;
 	}
 
 	public void addCredit(int added){
@@ -98,10 +102,13 @@ public class Credits implements CreditsIF, CreditSubject{
 	}
 
 	public void insertMoney(double amount){
+		MoneyListener ml = UIBuilder.getScreen_2A();
 		currentMoney += amount;
+		totalMoney += amount;
 		int creditsAdded = (int) (currentMoney / creditPrice);
 		currentMoney -= creditsAdded * creditPrice;
 		addCredit(creditsAdded);
+		ml.updateMoney(totalMoney);
 		notifyObservers();
 	}
 
@@ -127,5 +134,9 @@ public class Credits implements CreditsIF, CreditSubject{
 
 	public double getPrice(){
 		return creditPrice;
+	}
+
+	public double getFunds(){
+		return totalMoney;
 	}
 }

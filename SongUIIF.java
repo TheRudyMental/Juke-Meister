@@ -1,6 +1,6 @@
 package control;
 
-import Database.SongIF;
+import control.SongIF;
 import javafx.scene.control.Label;
 
 /*

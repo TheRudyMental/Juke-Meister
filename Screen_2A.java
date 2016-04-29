@@ -1,5 +1,7 @@
 package screen;
 
+import control.Credits;
+import control.CreditsIF;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -15,18 +17,20 @@ import javafx.stage.Stage;
 
 /**
  * Stats screen
- * 
+ *
  * @author JamieBurchette
  * @version 4/8/16
  *
  */
-public class Screen_2A extends GridPane implements ScreenInterface{
+public class Screen_2A extends GridPane implements ScreenInterface,control.MoneyListener{
 
 	private static Screen_2A instance;
-	
+
 	private Button back;
-	
+
 	private Button table;
+
+	TextField currentFunds;
 
 	Screen_2A() {
 		setConstraints();
@@ -56,7 +60,7 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 		int columnNumber = 4;
 		int rowNumber = 6;
 		for(int i = 0; i < columnNumber;i++){
-			ColumnConstraints col0 = new ColumnConstraints();		
+			ColumnConstraints col0 = new ColumnConstraints();
 			if(i == 0 || i == 3){
 				col0.setPercentWidth(20);
 			}
@@ -91,10 +95,10 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		back.getStyleClass().add("but");
 		back.setOnAction(buttonHandler);
-				
+
 		Label topTracks = new Label("Top Tracks");
 		topTracks.getStyleClass().add("label");
-		
+
 		Label leastPlayed = new Label("Least Played");
 		leastPlayed.getStyleClass().add("label");
 
@@ -105,25 +109,25 @@ public class Screen_2A extends GridPane implements ScreenInterface{
 		GridPane.setHalignment(leastPlayed,HPos.CENTER);
 
 		Label totalFunds = new Label("Total Funds:");
-		
+
 		GridPane textGrid = new GridPane();
 		for(int i = 0; i < 3; i++){
 			ColumnConstraints col = new ColumnConstraints();
 			col.setPercentWidth(33);
 			textGrid.getColumnConstraints().add(col);
 		}
-		
-		TextField currentFunds = new TextField();
+
+		currentFunds = new TextField();
 		currentFunds.getStyleClass().add("text");
 		currentFunds.setEditable(false);
 
 		this.add(totalFunds,1,3,2,1);
 		textGrid.add(currentFunds,1,0,1,1);
 		this.add(textGrid, 1,4,2,1);
-		
+
 		GridPane.setHalignment(totalFunds,HPos.CENTER);
 		GridPane.setHalignment(currentFunds,HPos.CENTER);
-		
+
 		table = new Button("Table of Previous Weeks");
 		this.add(table,1,5,2,1);
 		GridPane.setHalignment(table,HPos.CENTER);
@@ -138,7 +142,7 @@ public class Screen_2A extends GridPane implements ScreenInterface{
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen2());
- 
+
         }
         if(event.getSource()==table){
         	temp.setScene(ScreenBuilder.buildScreen2a1());
@@ -148,5 +152,10 @@ public class Screen_2A extends GridPane implements ScreenInterface{
         temp.show();
         }
     };
+
+	@Override
+	public void updateMoney(double money){
+		currentFunds.setText("" + money);
+	}
 
 }

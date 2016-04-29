@@ -40,7 +40,10 @@ public class PlayControl implements PlayControlInf{
 	 */
 	@Override
 	public void playSong(SongIF s) {
-		MediaPlayer temp = new MediaPlayer(new Media(s.getSongFile().getAbsolutePath()));
+		//SongDatabaseIF db = new DB_Controller();
+		s.addCount();
+		//db.update(s);
+		MediaPlayer temp = new MediaPlayer(new Media((s.getSongFile().toURI()).toString()));
 		toPlay.add(temp);
 
 		if(!playing){

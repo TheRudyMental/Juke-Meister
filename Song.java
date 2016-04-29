@@ -1,4 +1,4 @@
-package Database;
+package control;
 
 import java.io.File;
 import java.sql.Timestamp;
@@ -81,7 +81,6 @@ public class Song implements SongIF {
 		return monthCounter;
 	}
 
-	@Override
 	public long getDateAdded(){
 		return dateAdded.getTime();
 	}

@@ -4,7 +4,7 @@ package screen;
 
 import control.CreditObserver;
 import control.Credits;
-import controller.CreditsIF;
+import control.CreditsIF;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

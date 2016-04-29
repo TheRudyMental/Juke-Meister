@@ -1,4 +1,4 @@
-package Database;
+package control;
 
 import java.io.File;
 import java.sql.Connection;
@@ -205,7 +205,7 @@ public class DB_Controller implements SongDatabaseIF {
 
    }
 
-   private void update(SongIF s) {
+   public void update(SongIF s) {
 
 	   if (conn == null)
 		   connect();
