@@ -81,6 +81,7 @@ public class Credits implements CreditsIF, CreditSubject{
 		else{
 			System.out.println("Insufficient Credits");
 		}
+		notifyObservers();
 		creditsEntered = 0;
 	}
 

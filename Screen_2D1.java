@@ -128,8 +128,6 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
         @Override
         public void handle(KeyEvent event) {
         		if(event.getCode() == KeyCode.ENTER){
-        			System.out.println("Enter Pressed");
-        			System.out.println("notifying");
         			notifyListeners(vName.getText(),message.getText());
         		}
         }
@@ -141,13 +139,10 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
 	@Override
 	public void notifyListeners(String venueName, String message) {
 		for(VenueAndMessageListener vml : o){
-			System.out.println("Notifying all ");
 			if(venueName != null){
-				System.out.println("Setting Venue Name");
 				vml.updateVenueName(venueName);
 			}
 			if(message != null){
-				System.out.println("Setting message");
 				vml.updateMessage(message);
 			}
 		}
@@ -155,7 +150,6 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
 
 	public static void register(VenueAndMessageListener vml){
 		getInstance();
-		System.out.println("Adding");
 		o.add(vml);
 	}
 

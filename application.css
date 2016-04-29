@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 
-.root { -fx-background-color: linear-gradient(black, gray)}
+.root { -fx-background-color: linear-gradient(black, gray);}
 .but{
 
  	-fx-background-color: linear-gradient(#47f7eb 25%,#c3f7f3 100%);
@@ -11,11 +11,13 @@
 }
 .text{
 	-fx-background-color: #c3f7f3;
-	-fx-border-radius: 60px; 
+	-fx-border-radius: 60px;
 	-fx-font-family: Arial;
 }
 .label{
 	-fx-text-fill: #77ddff;
-	-fx-font-size: 20pt
+	-fx-font-size: 20pt;
 }
-
+.song{
+	-fx-background-color: linear-gradient(to right, orange, white);
+}

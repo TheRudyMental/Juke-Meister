@@ -1,5 +1,6 @@
 package control;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -7,6 +8,10 @@ import java.util.Queue;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import screen.ScreenInterface;
+import screen.Screen_1;
+import screen.Screen_1A;
+import screen.UIBuilder;
 
 /**
  *
@@ -66,6 +71,13 @@ public class PlayControl implements PlayControlInf{
 			@Override
 			public void run() {
 				playing = true;
+				Screen_1 sc = (Screen_1) Screen_1.getInstance();
+				Screen_1A sca = (Screen_1A) Screen_1A.getInstance();
+				String st = current.getMedia().getSource();
+				File tmp = new File(st);
+				String name = (tmp.getName().replace("%20", " "));
+				sc.updateNowPlaying(name.substring(0, (name.length()-4)));
+				sca.updateNowPlaying(name.substring(0, (name.length()-4)));
 			}
 		});
 		current.play();

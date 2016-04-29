@@ -32,6 +32,8 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 	private Label vName;
 	/*Label to hold message entered by admin, blank by default*/
 	private Label message;
+	/*Label to tell the user what song is playing*/
+	Label nowPlaying;
 
 	Screen_1() {
 		setConstraints();
@@ -93,9 +95,9 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 	private void makeComponents(){
 		Screen_2D1.register(this);
 		this.setOnKeyPressed(keyHandler);
-		vName = new Label("Venue Name");//set blank
+		vName = new Label("");//set blank
 		vName.getStyleClass().add("label");
-		message = new Label("Message");//set blank
+		message = new Label("");//set blank
 		message.getStyleClass().add("label");
 	    credit = new Label("Credits: ");
 	    credit.getStyleClass().add("label");
@@ -120,7 +122,7 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 		browse.getStyleClass().add("but");
 		this.add(browse,1,4,1,1);
 
-		Label nowPlaying = new Label("Now Playing"); //make this its own component later
+		nowPlaying = new Label(""); //make this its own component later
 		this.add(nowPlaying,1,5,1,1);
 
 		ScrollPane sc1 = new ScrollPane();
@@ -167,7 +169,6 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
         @Override
         public void handle(InputEvent event) {
         	CreditsIF control = Credits.getInstance();
-        	System.out.println("Credit Price is: " + ((Credits) control).getPrice());
         	if(event instanceof KeyEvent){
         		KeyEvent key = (KeyEvent) event;
         		switch(key.getCode()){
@@ -209,5 +210,9 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 	public void updateMessage(String newMessage) {
 		System.out.println("Message is now: " + newMessage);
 		message.setText(newMessage);
+	}
+
+	public void updateNowPlaying(String playing){
+		nowPlaying.setText(playing);
 	}
 }

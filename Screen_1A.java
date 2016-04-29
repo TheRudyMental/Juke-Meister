@@ -29,7 +29,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 	private static Screen_1A instance;
 
 	Button back;
-
+	/*Label for now playing song*/
+	Label nowPlaying;
 	Screen_1A(){
 		setConstraints();
 		makeComponents();
@@ -108,15 +109,15 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		}
 		this.add(atoz,0,1);
 
-		SongUI test = SongUIIF.makeElement(new Song("Trap", "San Holo", 2014, new File("C:\\Users\\Grant\\workspace\\Juke-Meister\\src\\San Holo - Donkey Kong.mp3"), null));
+		SongUI test = SongUIIF.makeElement(new Song("Trap", "San Holo", 2014, new File("C:\\Users\\Grant\\workspace\\Juke-Meister\\src\\San Holo - Donkey Kong.mp3"), new File("C:\\Users\\Grant\\workspace\\Juke-Meister\\src\\BoI Mega Satan.png")));
 		ScrollPane songlist = new ScrollPane(test);
 		songlist.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		songlist.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		this.add(songlist,1,1);
 
-		Label nowplaying = new Label ("Now Playing will go here");
-		setHalignment(nowplaying, HPos.CENTER);
-		this.add(nowplaying, 0, 2, 2, 1);
+		nowPlaying = new Label ("");
+		setHalignment(nowPlaying, HPos.CENTER);
+		this.add(nowPlaying, 0, 2, 2, 1);
 
 	}
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
@@ -164,5 +165,7 @@ public class Screen_1A extends GridPane implements ScreenInterface {
         }
     };
 
-
+	public void updateNowPlaying(String playing){
+		nowPlaying.setText(playing);
+	}
 }

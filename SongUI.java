@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -17,6 +19,7 @@ import javafx.stage.Stage;
 public class SongUI extends HBox implements SongUIIF{
 	/*Song object that contains the info about the song*/
 	SongIF song;
+	ImageView pic;
 	/*The title of the song*/
 	Label title;
 	/*The artist of the song*/
@@ -26,11 +29,14 @@ public class SongUI extends HBox implements SongUIIF{
 
 	SongUI(SongIF s){
 		song = s;
+		pic = new ImageView(new Image(s.getPicture().toURI().toString()));
+		pic.setFitHeight(30);
+		pic.setFitWidth(100);
 		title = new Label();
 		artist= new Label();
 		year = new Label();
-		this.getChildren().addAll(title,artist,year);
-		this.setSpacing(300);
+		this.getChildren().addAll(pic,title,artist,year);
+		this.setSpacing(250);
 		setText(song.getTitle(), song.getArtist(), song.getYear());
 		this.setOnMousePressed(new EventHandler<MouseEvent>(){
 			@Override
@@ -47,10 +53,12 @@ public class SongUI extends HBox implements SongUIIF{
 				}
 				else{
 					play.playSong(song);
-					System.out.println("Playing Song");
+					check.removeWhenPlay();
 				}
 			}
 		});
+
+		this.getStyleClass().add("song");
 	}
 
 	/*

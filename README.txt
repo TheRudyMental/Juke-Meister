@@ -24,3 +24,9 @@ To change the venue name and message:
 4.Put info into relevant text fields (either enter on physical keyboard or tapping text fields brings up on screen keyboard)
 5.Hit enter 
 	-Doing so will cause both to be updated if there is info in both text feilds at the time
+	
+To add single song:
+1.Go to admin screen
+2.Hit "Song Library" button
+3.Hit "Add Single" button
+4.Fill out necessary text fields, and hit "Browse" to open file explorer for picture and song file 

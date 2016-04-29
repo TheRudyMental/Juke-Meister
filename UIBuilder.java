@@ -18,13 +18,13 @@ public class UIBuilder {
 
 	public static Pane getScreen_1(){
 		if(screen1 == null)
-			screen1 = new Screen_1();
+			screen1 = (Screen_1) Screen_1.getInstance();
 		return screen1;
 	}
 
 	public static Screen_1A getScreen_1A(){
 		if(screen1a == null)
-			screen1a = new Screen_1A();
+			screen1a = (Screen_1A) Screen_1A.getInstance();
 		return screen1a;
 	}
 
