@@ -79,7 +79,7 @@ public class Screen_2D extends BorderPane implements ScreenInterface,control.Ven
 		message.setPromptText("Enter Message:");
 		message.getStyleClass().add("text");
 
-		fields.getChildren().addAll(time,vName,message);
+		fields.getChildren().addAll(vName,message);
 		fields.setSpacing(20);
 		fields.setAlignment(Pos.CENTER);
 
