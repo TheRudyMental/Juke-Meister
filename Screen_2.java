@@ -22,12 +22,15 @@ import javafx.stage.Stage;
 
 
  /**
-  *
+  * Admin main screen
   * @author saige.kittel, zachary.lorenzo
-  *
+  * @version 4/29/16
   */
- public class Screen_2 extends GridPane implements ScreenInterface{
+ public class Screen_2 extends GridPane implements ScreenInterface{\
+ 	//A singleton instance of screen
 	 private static Screen_2 instance;
+	 
+	 //Buttons to change screen
 	 private Button back;
  	 private Button stat;
  	 private Button lib;
@@ -35,7 +38,9 @@ import javafx.stage.Stage;
  	 private Button extra;
 
 
-
+/**
+ * Initiates the screen
+ */
  Screen_2() {
 	 setConstraints();
  	 makeComponents();
@@ -185,10 +190,10 @@ import javafx.stage.Stage;
 
 
  	}//end makeComponents
- 	/**
+ 	
+ 	/**Eventhandler to allow the user to press buttons and switch screens
  	 * @author zachary.lorenzo
  	 */
-
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -213,6 +218,7 @@ import javafx.stage.Stage;
         temp.show();
         }
     };
+    //Allows admin to change the song volume
     ChangeListener<Number> valueHandler = new ChangeListener<Number>(){
 
 		@Override
