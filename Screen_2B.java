@@ -8,16 +8,25 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-
+/**
+ * Song Library screen that allows the user to access screens that 
+ * alter the song database
+ * @author Saige Pattel, Zacharay Larenzo
+ * @version 4/29/16
+ */
 public class Screen_2B extends GridPane implements ScreenInterface{
-
+	//Singleton instance of screen
 	private static Screen_2B instance;
 
+	//Buttons for switching screens
 	Button back;
 	Button single;
 	Button album;
 	Button song;
 
+	/**
+	 * initiates the screen
+	 */
 	Screen_2B() {
 		setConstraints();
 		makeComponents();
@@ -133,6 +142,8 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 
 
 	}//end makeComponents
+	
+	//Handles the button presses to switch screens
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {

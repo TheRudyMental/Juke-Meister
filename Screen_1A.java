@@ -24,22 +24,43 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Browse songs screen - A screen to search for songs
+ * @author Zachary Lorenzo
+ * @version 4/29/16
+ */
 public class Screen_1A extends GridPane implements ScreenInterface {
 
+	//The instance of the screen
 	private static Screen_1A instance;
 
+	//A button to go back to previous screen
 	Button back;
+	
+	//A label that shows current song playing
 	Label nowPlaying;
+	
+	//The list of songs that can be played
 	ScrollPane songlist;
+	
+	//Allows the user to search for songs
 	TextField search;
+	
+	//Database of songs
 	DB_Controller db;
 
-
+	/**
+	 * Initiates the screen
+	 */
 	Screen_1A(){
 		setConstraints();
 		makeComponents();
 	}
 
+	/**
+	 * Returns a singleton instance of the screen
+	 * @return instance
+	 */
 	public static ScreenInterface getInstance(){
 		if(instance != null){
 			return instance;
@@ -50,6 +71,9 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		}
 	}
 
+	/**
+	 * Sets rows and columns of the grid
+	 */
 	private void setConstraints(){
 		ColumnConstraints col0 = new ColumnConstraints();
 		col0.setPercentWidth(20);
@@ -68,12 +92,21 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 
 	}
 
+	/**
+	 * Scales a button to take up as much space as possible
+	 * @param b the button to resize
+	 */
 	private void makeScale(Button b){
 		b.setMinHeight(0);
 		b.setMaxHeight(Double.MAX_VALUE);
 		b.setMinWidth(0);
 		b.setMaxWidth(Double.MAX_VALUE);
 	}
+	
+	/**
+	 * Scales a textfield to take up as much space as possible
+	 * @param t the textField to resize
+	 */
 	private void makeScale(TextField t){
 		t.setMinHeight(0);
 		t.setMaxHeight(Double.MAX_VALUE);
@@ -81,6 +114,9 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		t.setMaxWidth(Double.MAX_VALUE);
 	}
 
+	/**
+	 * Makes and adds components to the screen
+	 */
 	private void makeComponents(){
 		db = new DB_Controller();
 		this.setOnKeyPressed(keyHandler);
@@ -97,8 +133,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		search.getStyleClass().add("text");
 		this.add(search,1,0);
 
-
-		GridPane atoz = new GridPane();
+		//removed due to time constraints
+		/*GridPane atoz = new GridPane();
 		ColumnConstraints third = new ColumnConstraints();
 		third.setPercentWidth(33);
 		atoz.getColumnConstraints().addAll(third,third,third);
@@ -109,10 +145,9 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 			Label l = new Label(((char)('A'+i))+"");
 			setHalignment(l, HPos.CENTER);
 			l.getStyleClass().add("label");
-			//AddInvisButtonsHere
 			atoz.add(l , 1, i);
 		}
-		this.add(atoz,0,1);
+		this.add(atoz,0,1);*/
 		DB_Controller db= new DB_Controller();
 
 		VBox list = new VBox();
@@ -130,6 +165,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		this.add(nowPlaying, 0, 2, 2, 1);
 
 	}
+	
+	//Allows the user to go to previous screen using back button
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -144,6 +181,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
         }
 
     };
+    
+    //Allows the user to input text
     EventHandler<ActionEvent> textHandler = new EventHandler<ActionEvent>(){
     	@Override
     	public void handle(ActionEvent event){
@@ -151,8 +190,7 @@ public class Screen_1A extends GridPane implements ScreenInterface {
     	}
     };
 
-
-
+    //Allows the user to press specific keys to add money or enter a search request
     EventHandler<InputEvent> keyHandler = new EventHandler<InputEvent>() {
         @Override
         public void handle(InputEvent event) {
@@ -193,6 +231,11 @@ public class Screen_1A extends GridPane implements ScreenInterface {
         	}
         }
     };
+    
+    /**
+     * Updates the now playing label
+     * @param playing the name of the song being played
+     */
     public void updateNowPlaying(String playing){
     	nowPlaying.setText(playing);
     }

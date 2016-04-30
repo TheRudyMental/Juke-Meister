@@ -22,29 +22,45 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 /**
- *
+ * Parent class that the add song classes inherit from
  * @author JamieBurchette
  *
  * This method was created by Zachary Lorenzo, but logic was created by Jamie. credit where credit is due
  *
  */
 public class Screen_add extends GridPane implements ScreenInterface {
+	//instance of screen
 	private static Screen_add instance;
+	
+	//Database of songs
 	protected SongDatabaseIF db;
+	
+	//Buttons
 	private Button back;
 	private Button pictureButton;
 	private Button fileButton;
+	
+	//Allows user to choose file from system
 	private FileChooser fileChooser;
+	
+	//Fields needed for song class
 	protected TextField title;
 	protected TextField artist;
 	protected TextField year;
 	protected File picture;
 	protected File file;
 
+	/**
+	 * initiate the screen
+	 */
 	protected Screen_add() {
 		setConstraints();
 		makeComponents();
 	}
+	
+	/**
+	 * Singleton method
+	 */
 	public static ScreenInterface getInstance(){
 		if(instance != null){
 			return instance;
@@ -54,6 +70,10 @@ public class Screen_add extends GridPane implements ScreenInterface {
 			return instance;
 		}
 	}
+	
+	/**
+	 * Creates rows and columns of the screen's grid
+	 */
 	private void setConstraints(){
 		int columnNumber = 3;
 		int rowNumber = 7;
@@ -74,6 +94,10 @@ public class Screen_add extends GridPane implements ScreenInterface {
 			this.getRowConstraints().add(row0);
 		}
 	}
+	
+	/**
+	 * Creates and adds components of the screen
+	 */
 	private void makeComponents(){
 		back = new Button("Back");
 		GridPane.setHalignment(back, HPos.LEFT);
@@ -130,6 +154,7 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		this.add(fileButton, 2,6,1,1);
 		back.setOnAction(buttonHandler);
 	}
+	//Allows buttons to access files or go to previous screen
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -156,6 +181,8 @@ public class Screen_add extends GridPane implements ScreenInterface {
         }
 
     };
+    
+    //Clears the table
     EventHandler<InputEvent> keyHandler = new EventHandler<InputEvent>(){
     	public void handle(InputEvent e){
     		if(e instanceof KeyEvent){

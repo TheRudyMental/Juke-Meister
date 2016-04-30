@@ -22,20 +22,25 @@ import javafx.stage.Stage;
 
 
  /**
-  *
+  * Admin main screen
   * @author saige.kittel, zachary.lorenzo
-  *
+  * @version 4/29/16
   */
- public class Screen_2 extends GridPane implements ScreenInterface{
+ public class Screen_2 extends GridPane implements ScreenInterface{\
+ 	//A singleton instance of screen
 	 private static Screen_2 instance;
+	 
+	 //Buttons to change screen
 	 private Button back;
- 	 private Button stat;
+ 	 //private Button stat;
  	 private Button lib;
  	 private Button credit;
  	 private Button extra;
 
 
-
+/**
+ * Initiates the screen
+ */
  Screen_2() {
 	 setConstraints();
  	 makeComponents();
@@ -147,13 +152,13 @@ import javafx.stage.Stage;
 
  		gridpane2.getRowConstraints().addAll(subrow1,subrow2,subrow3);
 
- 		stat = new Button("Statistics Screen");
+ 		/*stat = new Button("Statistics Screen");
  		stat.setMinSize(0, 0);
 		stat.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		stat.setWrapText(true);
  		stat.setOnAction(buttonHandler);
  		stat.getStyleClass().add("but");
- 		gridpane2.add(stat,0,0);
+ 		gridpane2.add(stat,0,0);*/
 
  		lib = new Button("Song Library");
  		lib.setOnAction(buttonHandler);
@@ -185,10 +190,10 @@ import javafx.stage.Stage;
 
 
  	}//end makeComponents
- 	/**
+ 	
+ 	/**Eventhandler to allow the user to press buttons and switch screens
  	 * @author zachary.lorenzo
  	 */
-
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -196,9 +201,9 @@ import javafx.stage.Stage;
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen1());
         }
-        if(event.getSource()==stat){
+        /*if(event.getSource()==stat){
         	temp.setScene(ScreenBuilder.buildScreen2a());
-        }
+        }*/
         if(event.getSource()==lib){
         	temp.setScene(ScreenBuilder.buildScreen2b());
         }
@@ -213,6 +218,7 @@ import javafx.stage.Stage;
         temp.show();
         }
     };
+    //Allows admin to change the song volume
     ChangeListener<Number> valueHandler = new ChangeListener<Number>(){
 
 		@Override

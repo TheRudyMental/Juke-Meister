@@ -12,16 +12,20 @@ import javafx.stage.Stage;
 
 
 /**
- * Add Single screen
+ * Add Single screen adds a single song to the database
  *
  * @author JamieBurchette, ZacharyLorenzo
- * @version 4/11/16
+ * @version 4/29/16
  *
  */
 public class Screen_2B1 extends Screen_add implements ScreenInterface{
 
+	//Singleton instance of the screen
 	private static Screen_add instance;
 
+	/**
+	 * Initiates the screen and adds the addSingle button
+	 */
 	Screen_2B1() {
 		new Screen_add();
 		Button addSingle = new Button("Add Single");
@@ -33,6 +37,7 @@ public class Screen_2B1 extends Screen_add implements ScreenInterface{
 		addSingle.getStyleClass().add("but");
 	}
 
+	//Eventhandler to send song information to the database
 	EventHandler<ActionEvent> add = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -42,6 +47,7 @@ public class Screen_2B1 extends Screen_add implements ScreenInterface{
         		db.addRecord(title.getText(), artist.getText(), Integer.parseInt(year.getText()),file, picture);
         	}
         	else{
+        		//Alerts the admin if necessary information is missing
         		Alert alert = new Alert(AlertType.INFORMATION);
         		alert.setTitle("Error!");
         		alert.setContentText("The title, artist, and year fields cannot be empty!");

@@ -17,15 +17,19 @@ import javafx.stage.Stage;
  * Credit Options screen
  * 
  * @author JamieBurchette
- * @version 4/8/16
+ * @version 4/29/16
  *
  */
 public class Screen_2C extends GridPane implements ScreenInterface{
-
+	//Singleton instance of screen
 	private static Screen_2C instance;
 	
+	//Button to return to previous screen
 	private Button back;
 
+	/**
+	 * initiates the screen
+	 */
 	Screen_2C() {
 		setConstraints();
 		makeComponents();
@@ -105,6 +109,7 @@ public class Screen_2C extends GridPane implements ScreenInterface{
 		GridPane.setHalignment(creditsPerBonus, HPos.CENTER);
 		this.add(creditsPerBonus, 1,2,1,1);
 		}
+	//Lets the back button go to previous screen	
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {

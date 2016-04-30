@@ -15,7 +15,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 /**
- * Stats screen
+ * Stats screen to show statistics of the juke meister
  *
  * @author JamieBurchette
  * @version 4/8/16
@@ -23,14 +23,21 @@ import javafx.stage.Stage;
  */
 public class Screen_2A extends GridPane implements ScreenInterface, MoneyListener{
 
+	//Singleton instance of screen
 	private static Screen_2A instance;
 
+	//Button to go to previous screen
 	private Button back;
 
+	//Button to go to table of Previous weeks
 	private Button table;
 
+	//Shows current funds in machine
 	TextField currentFunds;
 
+	/**
+	 * initiates the screen
+	 */
 	Screen_2A() {
 		setConstraints();
 		makeComponents();
@@ -135,6 +142,8 @@ public class Screen_2A extends GridPane implements ScreenInterface, MoneyListene
 		table.setOnAction(buttonHandler);
 		table.getStyleClass().add("but");
 	}
+	
+	//Allows the buttons to go to their respective screens
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -152,6 +161,10 @@ public class Screen_2A extends GridPane implements ScreenInterface, MoneyListene
         }
     };
 
+	/**
+	 * Updates the amount of money in the machine
+	 * @param money the new value of currentFunds
+	 */
 	@Override
 	public void updateMoney(double money) {
 		currentFunds.setText("" + money);

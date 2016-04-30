@@ -14,17 +14,31 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Table of previous weeks screen
+ * @author Zachary Lorenzo
+ * @version 4/29/16
+ */
 public class Screen_2A1 extends GridPane implements ScreenInterface {
-	
+	//Singleton instance of screen
 	private static Screen_2A1 instance;
 	
+	//Button for going to previous screen
 	private Button back;
 	
+	/**
+	 * initializes the screen
+	 */
 	Screen_2A1(){
 		setConstraints();
 		makeComponents();
 	}
 	
+	/**
+	 * Singleton method to return screen
+	 * @return instance
+	 * ?
+	 */ 
 	public static ScreenInterface getInstance(){
 		if(instance != null){
 			return instance;
@@ -35,6 +49,9 @@ public class Screen_2A1 extends GridPane implements ScreenInterface {
 		}
 	}
 	
+	/**
+	 * Defines rows and columns of the screen's grid
+	 */
 	private void setConstraints(){
 		ColumnConstraints col1 = new ColumnConstraints();
 		col1.setPercentWidth(20);
@@ -56,10 +73,18 @@ public class Screen_2A1 extends GridPane implements ScreenInterface {
 		this.getRowConstraints().setAll(row1,row2,row3);
 	}
 	
+	/**
+	 * Resizes button to fit available size
+	 * @param b the button to resize
+	 */
 	private void setup(Button b){
 		b.setMinSize(0, 0);
 		b.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 	}
+	
+	/**
+	 * Creates and adds components to the screen
+	 */
 	private void makeComponents(){
 		
 		back = new Button("Back");
@@ -84,6 +109,8 @@ public class Screen_2A1 extends GridPane implements ScreenInterface {
 		
 		
 	}
+	
+	//Allows the admin to go to previous screen
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
