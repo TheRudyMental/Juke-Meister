@@ -18,12 +18,15 @@ import javafx.stage.Stage;
  
  
  /**
-  * 
+  * Admin main screen
   * @author saige.kittel, zachary.lorenzo
-  *
+  * @version 4/29/16
   */
  public class Screen_2 extends GridPane implements ScreenInterface{
+ 	 //Instance of the screen
 	 private static Screen_2 instance;
+	 
+	 //Buttons to go to different screens
 	 private Button back;
  	 private Button stat;
  	 private Button lib;
@@ -31,8 +34,10 @@ import javafx.stage.Stage;
  	 private Button extra;
  
  
- 
- Screen_2() {
+ 	/**
+ 	 * Initiates the screen
+ 	 */
+ 	Screen_2() {
 	 setConstraints();
  	 makeComponents();
  	 }
@@ -97,7 +102,7 @@ import javafx.stage.Stage;
  	 */
  
  	private void makeComponents(){
- 
+ 		//Adds button to go back to previous screen
  		back = new Button("Back");
  		back.setOnAction(buttonHandler);
  		back.setMinSize(0, 0);
@@ -105,6 +110,7 @@ import javafx.stage.Stage;
  		back.getStyleClass().add("but");
  		this.add(back,0,0);
  
+ 		//Adds vbox to hold volume and volume slider
  		VBox vbox = new VBox();
         	vbox.setAlignment(Pos.CENTER);
         	
@@ -141,6 +147,7 @@ import javafx.stage.Stage;
  		
  		gridpane2.getRowConstraints().addAll(subrow1,subrow2,subrow3);
  
+ 		//Button to change screen to statistics screen
  		stat = new Button("Statistics Screen");
  		stat.setMinSize(0, 0);
 		stat.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -149,6 +156,7 @@ import javafx.stage.Stage;
  		stat.getStyleClass().add("but");
  		gridpane2.add(stat,0,0);
  
+ 		//Button to change screen to song library screen
  		lib = new Button("Song Library");
  		lib.setOnAction(buttonHandler);
  		lib.setMinSize(0, 0);
@@ -157,6 +165,7 @@ import javafx.stage.Stage;
  		lib.getStyleClass().add("but");
  		gridpane2.add(lib,2,0);
  
+ 		//Button to change screen to credit options screen
  		credit = new Button("Credit Options");
  		credit.setOnAction(buttonHandler);
  		credit.setMinSize(0, 0);
@@ -165,6 +174,7 @@ import javafx.stage.Stage;
  		credit.getStyleClass().add("but");
  		gridpane2.add(credit,0,2);
  
+ 		//Button to change screen to extra options screen
  		extra = new Button("Extra Options");
  		extra.setOnAction(buttonHandler);
  		extra.setMinSize(0, 0);
@@ -179,11 +189,11 @@ import javafx.stage.Stage;
  	
  
  	}//end makeComponents
- 	/**
+ 	
+ 	/**Handles button presses to change screens
  	 * @author zachary.lorenzo
  	 */
- 
-	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
+ 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
         Stage temp = (Stage)((Node) event.getSource()).getScene().getWindow();
