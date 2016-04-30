@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 	 
 	 //Buttons to change screen
 	 private Button back;
- 	 private Button stat;
+ 	 //private Button stat;
  	 private Button lib;
  	 private Button credit;
  	 private Button extra;
@@ -152,13 +152,13 @@ import javafx.stage.Stage;
 
  		gridpane2.getRowConstraints().addAll(subrow1,subrow2,subrow3);
 
- 		stat = new Button("Statistics Screen");
+ 		/*stat = new Button("Statistics Screen");
  		stat.setMinSize(0, 0);
 		stat.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
  		stat.setWrapText(true);
  		stat.setOnAction(buttonHandler);
  		stat.getStyleClass().add("but");
- 		gridpane2.add(stat,0,0);
+ 		gridpane2.add(stat,0,0);*/
 
  		lib = new Button("Song Library");
  		lib.setOnAction(buttonHandler);
@@ -201,9 +201,9 @@ import javafx.stage.Stage;
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen1());
         }
-        if(event.getSource()==stat){
+        /*if(event.getSource()==stat){
         	temp.setScene(ScreenBuilder.buildScreen2a());
-        }
+        }*/
         if(event.getSource()==lib){
         	temp.setScene(ScreenBuilder.buildScreen2b());
         }
