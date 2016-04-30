@@ -1,6 +1,8 @@
 package control;
 
-import control.SongIF;
+import java.net.MalformedURLException;
+
+import Database.SongIF;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -19,6 +21,7 @@ import javafx.stage.Stage;
 public class SongUI extends HBox implements SongUIIF{
 	/*Song object that contains the info about the song*/
 	SongIF song;
+
 	ImageView pic;
 	/*The title of the song*/
 	Label title;
@@ -27,11 +30,15 @@ public class SongUI extends HBox implements SongUIIF{
 	/*The release year of the song*/
 	Label year;
 
-	SongUI(SongIF s){
+	public SongUI(SongIF s){
 		song = s;
-		pic = new ImageView(new Image(s.getPicture().toURI().toString()));
-		pic.setFitHeight(30);
-		pic.setFitWidth(100);
+		try {
+			pic=new ImageView(new Image(s.getPicture().toURI().toURL().toString()));
+			pic.setFitHeight(30);
+			pic.setFitWidth(100);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 		title = new Label();
 		artist= new Label();
 		year = new Label();
@@ -57,7 +64,6 @@ public class SongUI extends HBox implements SongUIIF{
 				}
 			}
 		});
-
 		this.getStyleClass().add("song");
 	}
 

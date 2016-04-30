@@ -6,18 +6,20 @@
  	-fx-background-color: linear-gradient(#47f7eb 25%,#c3f7f3 100%);
  	-fx-border-radius: 60px;
  	-fx-font-family: Arial;
- 	-fx-font-size: 20px;
+ 	-fx-font-size: 20pt;
  	-fx-padding: 10px 20px 10px 20px;
 }
 .text{
 	-fx-background-color: #c3f7f3;
 	-fx-border-radius: 60px;
 	-fx-font-family: Arial;
+	-fx-font-size:20pt
 }
 .label{
 	-fx-text-fill: #77ddff;
-	-fx-font-size: 20pt;
+	-fx-font-size: 12pt;
 }
 .song{
-	-fx-background-color: linear-gradient(to right, orange, white);
+	-fx-background-color: linear-gradient(to right, orange, white)
 }
+

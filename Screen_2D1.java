@@ -3,6 +3,7 @@ package screen;
 import java.util.ArrayList;
 
 import control.VenueAndMessageListener;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -15,6 +16,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -150,6 +152,7 @@ public class Screen_2D1 extends BorderPane implements ScreenInterface,control.Ve
 
 	public static void register(VenueAndMessageListener vml){
 		getInstance();
+		System.out.println("Adding");
 		o.add(vml);
 	}
 

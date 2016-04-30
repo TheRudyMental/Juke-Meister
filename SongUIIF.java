@@ -1,7 +1,7 @@
 package control;
 
-import control.SongIF;
-import javafx.scene.control.Label;
+import Database.SongIF;
+
 
 /*
  * @author Grant Brown

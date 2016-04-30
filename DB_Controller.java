@@ -10,6 +10,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import Database.SongDatabaseIF;
+import Database.SongIF;
 import control.SongFactory;
 
 public class DB_Controller implements SongDatabaseIF {
@@ -20,21 +22,23 @@ public class DB_Controller implements SongDatabaseIF {
 
     private String protocol = "jdbc:derby:";
 
-    ArrayList<SongIF> songs;
+    public ArrayList<SongIF> songs;
 
-    String songDB = "derbyDB";
+    String songDB = "JukeMeisterDBateam";
 
     Connection conn = null;
 
+    int records;
+
     public DB_Controller(){
-        songs = new ArrayList<SongIF>();
+    	songs = new ArrayList<SongIF>();
         this.createTable();
         songs = selectAll(true);
     }
 
     public void add(SongIF newSong){
+    	this.insert(newSong);
         songs.add(newSong);
-        this.insert(newSong);
     }
 
     public void addRecord(String title, String artist, int year, File song, File picture){
@@ -149,19 +153,21 @@ public class DB_Controller implements SongDatabaseIF {
     		   connect();
 
 	     try{
-	    	Statement st =conn.createStatement();
+	    	Statement st = conn.createStatement();
+	    	records++;
 
-	    	st.execute("CREATE TABLE dir ( "
-					 +  "id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-					 + " title STRING UNIQUE NOT NULL,"
-	                 + " artist STRING NOT NULL,"
-	                 + " year INTEGER,"
-	                 + " songFile BLOB NOT NULL,"
-	                 + " picture BLOB,"
-	                 + " weekCounter INTEGER NOT NULL,"
-	                 + " monthCounter INTEGER NOT NULL)");
+	    	st.execute("CREATE TABLE filestorage ( "
+					 +  "id INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1 ),"
+					 + " title VARCHAR(150) NOT NULL ,"
+	                 + " artist VARCHAR (150) NOT NULL ,"
+	                 + " yearo INTEGER ,"
+	                 + " songFile VARCHAR(255) NOT NULL,"
+	                 + " picture VARCHAR(255) NOT NULL,"
+	                 + " weekCounter INTEGER ,"
+	                 + " MonthCounter INTEGER )");
 
 	    	   conn.commit();
+
 	    	   System.out.println("Created table location");
 	    }
 	    catch(SQLException ex){
@@ -181,15 +187,13 @@ public class DB_Controller implements SongDatabaseIF {
 	   try
 	   {
 		   PreparedStatement psInsert;
-		   psInsert= conn.prepareStatement(  "insert into dir(title, artist, year, songFile, picture, weekCounter, monthCounter) values ( ?, ?, ?, ?, ?, ?, ?)");
+		   psInsert= conn.prepareStatement(  "insert into filestorage(title, artist, yearo, songFile, picture) values ( ?, ?, ?, ?, ?)");
 
 		   psInsert.setString(1, s.getTitle());
 	       psInsert.setString(2, s.getArtist());
 	       psInsert.setInt(3, s.getYear());
 	       psInsert.setString(4, s.getSongFile().toString());
 	       psInsert.setString(5, s.getPicture().toString());
-	       psInsert.setInt(6, s.getWeekCount());
-	       psInsert.setInt(7, s.getMonthCount());
 	       psInsert.executeUpdate();
 
 	       conn.commit();
@@ -212,15 +216,13 @@ public class DB_Controller implements SongDatabaseIF {
 
 	   try{
 		   PreparedStatement psUpdate;
-		   psUpdate= conn.prepareStatement(  "UPDATE dir SET title=?,  artist=?, year=?, songFile=?, picture=?, weekCounter=?, monthCounter=? WHERE id = " + s.getId());
+		   psUpdate= conn.prepareStatement(  "UPDATE filestorage SET title=?,  artist=?, yearo=?, songFile=?, picture=? WHERE id = " + s.getId());
 
 		   psUpdate.setString(1, s.getTitle());
 	       psUpdate.setString(2, s.getArtist());
 	       psUpdate.setInt(3, s.getYear());
 	       psUpdate.setString(4, s.getSongFile().toString());
 	       psUpdate.setString(5, s.getPicture().toString());
-	       psUpdate.setInt(6, s.getWeekCount());
-	       psUpdate.setInt(7, s.getMonthCount());
 
 	       psUpdate.executeUpdate();
 
@@ -244,7 +246,7 @@ public class DB_Controller implements SongDatabaseIF {
 
 	   try{
 		   PreparedStatement psUpdate;
-		   psUpdate= conn.prepareStatement(  "DELETE FROM dir WHERE id = " + s.getId());
+		   psUpdate= conn.prepareStatement(  "DELETE FROM filestorage WHERE id = " + s.getId());
 		   psUpdate.executeUpdate();
 	       conn.commit();
 	       System.out.println("Record removed:");
@@ -267,7 +269,7 @@ public class DB_Controller implements SongDatabaseIF {
 	   try{
 		   SongIF s = this.getSongByTitle(title);
 		   PreparedStatement psUpdate;
-		   psUpdate= conn.prepareStatement(  "DELETE FROM dir WHERE id = " + s.getId());
+		   psUpdate= conn.prepareStatement(  "DELETE FROM filestorage WHERE id = " + s.getId());
 		   psUpdate.executeUpdate();
 	       conn.commit();
 	       System.out.println("Record removed:");
@@ -317,16 +319,16 @@ public class DB_Controller implements SongDatabaseIF {
 	     try{
 	   		Statement st =conn.createStatement();
 
-	   		rs = st.executeQuery( "SELECT * FROM dir ORDER BY title");
+	   		rs = st.executeQuery( "SELECT * FROM filestorage ORDER BY title");
 
 	   		if (clear) songs.clear();
 
 	        while ( rs.next()){
-	        	SongIF s =  SongFactory.makeSong(rs.getString(1),
-												        	rs.getString(2),
-												        	rs.getInt(3),
-												        	new File(rs.getString(4)),
-												        	new File(rs.getString(5))
+	        	SongIF s =  SongFactory.makeSong(rs.getString("title"),
+												        	rs.getString("artist"),
+												        	rs.getInt("yearo"),
+												        	new File(rs.getString("songFile")),
+												        	new File(rs.getString("picture"))
 												        	);
 
 	        	songs.add(s);
@@ -345,7 +347,7 @@ public class DB_Controller implements SongDatabaseIF {
    public ArrayList<SongIF> selectSongs(String where, boolean clear) {
 
 
-	   String query = "SELECT id, title, artist, song FROM dir  WHERE " + where;
+	   String query = "SELECT id, title, artist, song FROM filestorage  WHERE " + where;
 
 
 	   System.out.println("SELECT: " + query);
@@ -363,11 +365,11 @@ public class DB_Controller implements SongDatabaseIF {
 	   		if (clear) songs.clear();
 
 	        while ( rs.next()){
-	        	SongIF s = SongFactory.makeSong(rs.getString(1),
-	        			                                   rs.getString(2),
-	        			                                   rs.getInt(3),
-	        			                                   new File(rs.getString(4)),
-	        			                                   new File(rs.getString(5)));
+	        	SongIF s = SongFactory.makeSong(rs.getString("title"),
+	        			                                   rs.getString("artist"),
+	        			                                   rs.getInt("yearo"),
+	        			                                   new File(rs.getString("songFile")),
+	        			                                   new File(rs.getString("picture")));
 
 
 	        	this.songs.add(s);

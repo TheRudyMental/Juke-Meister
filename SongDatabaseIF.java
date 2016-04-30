@@ -1,4 +1,4 @@
-package control;
+package Database;
 
 import java.io.File;
 
@@ -16,6 +16,8 @@ public interface SongDatabaseIF {
 
 	public void removeByTitle(String title);
 
-	public void update(SongIF s);
+	public void addRecord(String text, String text2, int parseInt, File file, File picture);
+
+	public void dropTable();
 
 }

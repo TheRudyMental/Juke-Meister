@@ -10,9 +10,9 @@ public interface PlayControlInf {
 	/**
 	 * The playSong method is to either play the song if no other song is playing
 	 *   or to add it to a queue if one is
-	 * @param s the song to be played
+	 * @param song the song to be played
 	 */
-	public void playSong(SongIF s);
+	public void playSong(Database.SongIF song);
 
 	/**
 	 * This method is to change the volume that the song is being played at

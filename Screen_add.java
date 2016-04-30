@@ -2,22 +2,25 @@ package screen;
 
 import java.io.File;
 
+import control.DB_Controller;
+import Database.SongDatabaseIF;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 /**
  *
  * @author JamieBurchette
@@ -27,6 +30,7 @@ import javafx.stage.Window;
  */
 public class Screen_add extends GridPane implements ScreenInterface {
 	private static Screen_add instance;
+	protected SongDatabaseIF db;
 	private Button back;
 	private Button pictureButton;
 	private Button fileButton;
@@ -78,13 +82,15 @@ public class Screen_add extends GridPane implements ScreenInterface {
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		back.getStyleClass().add("but");
 		this.add(back,0,0,1,1);
-		
+
 		fileChooser = new FileChooser();
    	 	fileChooser.setTitle("Open Resource File");
 
+   	 	db=new DB_Controller();
+
 		title = new TextField();
 		artist = new TextField();
-		TextField year = new TextField();
+		year = new TextField();
 
 		title.setPromptText("Enter Title");
 		title.getStyleClass().add("text");
@@ -135,18 +141,31 @@ public class Screen_add extends GridPane implements ScreenInterface {
             temp.show();
         }
         else if(event.getSource() == fileButton){
-        	 fileChooser.getExtensionFilters().addAll(
+        	fileChooser.getExtensionFilters().clear();
+        	fileChooser.getExtensionFilters().addAll(
         	         new ExtensionFilter("Audio Files", "*.wav", "*.mp3"));
-        	 file = fileChooser.showOpenDialog(temp);
-        	 
+        	file = fileChooser.showOpenDialog(temp);
+
         }
         else if(event.getSource() == pictureButton){
-        	 fileChooser.getExtensionFilters().addAll(
+        	fileChooser.getExtensionFilters().clear();
+        	fileChooser.getExtensionFilters().addAll(
         	         new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-        	 picture = fileChooser.showOpenDialog(temp);
+        	picture = fileChooser.showOpenDialog(temp);
         }
         }
-        
+
+    };
+    EventHandler<InputEvent> keyHandler = new EventHandler<InputEvent>(){
+    	public void handle(InputEvent e){
+    		if(e instanceof KeyEvent){
+            	KeyEvent key = (KeyEvent) e;
+            	if(key.getCode()==KeyCode.Q){
+            		db.dropTable();
+            		System.out.println("cleared");
+            	}
+    	}
+    	}
     };
 }
 

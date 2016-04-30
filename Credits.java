@@ -1,7 +1,6 @@
 package control;
 
 import java.util.ArrayList;
-
 import control.CreditsIF;
 import screen.Screen_2A;
 import screen.UIBuilder;
@@ -136,8 +135,8 @@ public class Credits implements CreditsIF, CreditSubject{
 	public double getPrice(){
 		return creditPrice;
 	}
-
 	public double getFunds(){
 		return totalMoney;
 	}
+
 }

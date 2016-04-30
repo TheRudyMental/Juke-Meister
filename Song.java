@@ -1,10 +1,11 @@
-package control;
+package Database;
 
 import java.io.File;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-public class Song implements SongIF {
+
+public class Song implements SongIF  {
 
 	private String title;
 	private String artist;
@@ -12,7 +13,7 @@ public class Song implements SongIF {
 	private File songFile;
 	private File picture;
 	private int id;
-	private int weekCounter;
+	public int weekCounter;
 	private int monthCounter;
 	private Timestamp dateAdded;
 
@@ -81,6 +82,7 @@ public class Song implements SongIF {
 		return monthCounter;
 	}
 
+	@Override
 	public long getDateAdded(){
 		return dateAdded.getTime();
 	}
@@ -150,6 +152,11 @@ public class Song implements SongIF {
 			return false;
 		}
 	}
+
+
+
+
+
 
 
 }

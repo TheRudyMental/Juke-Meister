@@ -1,17 +1,13 @@
 package control;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Queue;
-
+import Database.SongIF;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import screen.ScreenInterface;
 import screen.Screen_1;
 import screen.Screen_1A;
-import screen.UIBuilder;
 
 /**
  *
@@ -45,11 +41,14 @@ public class PlayControl implements PlayControlInf{
 	 */
 	@Override
 	public void playSong(SongIF s) {
-		//SongDatabaseIF db = new DB_Controller();
-		s.addCount();
-		//db.update(s);
-		MediaPlayer temp = new MediaPlayer(new Media((s.getSongFile().toURI()).toString()));
-		toPlay.add(temp);
+		MediaPlayer temp;
+		try {
+			temp = new MediaPlayer(new Media(s.getSongFile().toURI().toURL().toString()));
+			toPlay.add(temp);
+			s.addCount();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 
 		if(!playing){
 			play();
