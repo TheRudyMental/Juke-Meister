@@ -29,8 +29,13 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Creates the home screen
+ * @author Grant Brown
+ * @version 4/29/16
+ */
 public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver,control.VenueAndMessageListener{
-
+	/*Singleton instance of the screen*/
 	private static Screen_1 instance;
 	/*Button used for browsing*/
 	private Button browse;
@@ -40,9 +45,12 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 	private Label vName;
 	/*Label to hold message entered by admin, blank by default*/
 	private Label message;
-
+	/*Label to tell the user what song is playing*/
 	Label nowPlaying;
 
+	/**
+	 * Initiates the screen
+	 */
 	Screen_1() {
 		setConstraints();
 		makeComponents();
@@ -69,8 +77,13 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 	 *
 	 */
 	private void setConstraints(){
+		//Number of columns on grid
 		int columnNumber = 3;
+		
+		//Number of rows on grid
 		int rowNumber = 6;
+		
+		//Sets column widths for number of columns chosen
 		for(int i = 0; i < columnNumber;i++){
 			ColumnConstraints col0 = new ColumnConstraints();
 			col0.setPercentWidth(40);
@@ -80,6 +93,7 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 			this.getColumnConstraints().add(col0);
 		}//end for
 
+		//Sets row widths for number of rows chosen
 		for(int i = 0; i<rowNumber;i++){
 			RowConstraints row0 = new RowConstraints();
 			row0.setPercentHeight(10);
@@ -115,12 +129,13 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 		this.add(message,1,1,1,1);
 		this.add(credit, 1, 2, 1, 1);
 
+		//Creates and adds browse button
 		browse = new Button("Browse");
 		browse.setOnAction(buttonHandler);
 		browse.getStyleClass().add("but");
 		this.add(browse,1,4,1,1);
 
-
+		//Creates titles for lists
 		Label pop = new Label("Popular Songs");
 		pop.getStyleClass().add("label");
 		Label newSongs = new Label("New Songs");
@@ -128,9 +143,11 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 
 		this.add(pop,0,2,1,1);
 		this.add(newSongs,2,2,1,1);
-
+		
+		//Database of songs
 		DB_Controller db = new DB_Controller();
 
+		//List of popular songs
 		VBox poplist = new VBox();
 		Collections.sort((List) db.songs,new SongCountSorter());
 		for(int i=0; i<9; i++){
@@ -138,6 +155,7 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 			poplist.getChildren().add(SongUIIF.makeElement(db.songs.get(i)));
 		}
 
+		//List of newest songs
 		VBox newlist = new VBox();
 		Collections.sort((List)db.songs,new SongDateSorter());
 		for(int i=0; i<9; i++){
@@ -145,9 +163,11 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 			newlist.getChildren().add(SongUIIF.makeElement(db.songs.get(i)));
 		}
 
-		nowPlaying = new Label(""); //make this its own component later
+		//Label to show that a song is now playing
+		nowPlaying = new Label("");
 		this.add(nowPlaying,1,5,1,1);
 
+		//Scrollpanes to hold the lists
 		ScrollPane sc1 = new ScrollPane(poplist);
 		ScrollPane sc2 = new ScrollPane(newlist);
 
@@ -162,6 +182,8 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 
 		setCenterAlignment();
 	}//end makeComponents
+	
+	//An eventhandler to allow the user to browse the songs
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -186,6 +208,9 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 		}
 	}
 
+	/**
+	 * An eventhandler that allows the user to insert money with different keys
+	 */
 	EventHandler<InputEvent> keyHandler = new EventHandler<InputEvent>() {
         @Override
         public void handle(InputEvent event) {
@@ -216,22 +241,39 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
         }
     };
 
+	/**
+     	* Updates the Credits amount
+     	* @param credits the new amount of credits
+     	*/
 	@Override
 	public void update(int credits) {
 		credit.setText("Credits: " + credits);
 	}
 
+	/**
+	 * Updates the name of the venue displayed
+	 * @param newName the new venue name
+	 */
 	@Override
 	public void updateVenueName(String newName) {
 		System.out.println("Venue name is now: " + newName);
 		vName.setText(newName);
 	}
 
+	/**
+	 * Updates the message displayed
+	 * @param newMessage the new message displayed
+	 */
 	@Override
 	public void updateMessage(String newMessage) {
 		System.out.println("Message is now: " + newMessage);
 		message.setText(newMessage);
 	}
+	
+	/**
+	 * Updates the now playing label with the name of the song
+	 * @param playing the name of the song currently playing
+	 */
 	public void updateNowPlaying(String playing){
 		nowPlaying.setText(playing);
 	}
