@@ -2,6 +2,11 @@ package Database;
 
 import java.io.File;
 
+/**
+ * Interface for the song object to allow loose coupling
+ * @author Jamie Burchette, Zachary Larenzo, Grant Brown
+ * @version 4/29/16
+ */
 public interface SongIF {
 	/**
 	 *
