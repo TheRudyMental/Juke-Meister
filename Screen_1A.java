@@ -133,8 +133,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		search.getStyleClass().add("text");
 		this.add(search,1,0);
 
-
-		GridPane atoz = new GridPane();
+		//removed due to time constraints
+		/*GridPane atoz = new GridPane();
 		ColumnConstraints third = new ColumnConstraints();
 		third.setPercentWidth(33);
 		atoz.getColumnConstraints().addAll(third,third,third);
@@ -145,10 +145,9 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 			Label l = new Label(((char)('A'+i))+"");
 			setHalignment(l, HPos.CENTER);
 			l.getStyleClass().add("label");
-			//AddInvisButtonsHere
 			atoz.add(l , 1, i);
 		}
-		this.add(atoz,0,1);
+		this.add(atoz,0,1);*/
 		DB_Controller db= new DB_Controller();
 
 		VBox list = new VBox();
