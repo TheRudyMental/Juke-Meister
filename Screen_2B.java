@@ -8,16 +8,26 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
-
+/**
+ * Song Library screen that allows the user to access screens that 
+ * alter the song database
+ * @author Saige Pattel
+ * @version 4/29/16
+ */
 public class Screen_2B extends GridPane implements ScreenInterface{
 
+	//A singleton instance of the screen
 	private static Screen_2B instance;
 
+	//Buttons to change the screen
 	Button back;
 	Button single;
 	Button album;
 	Button song;
 
+	/**
+	 * Initiates the screen
+	 */ 
 	Screen_2B() {
 		setConstraints();
 		makeComponents();
@@ -43,7 +53,6 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 	 *
 	 */
 	private void setConstraints(){
-
 
 	     ColumnConstraints col1 = new ColumnConstraints();
 	     col1.setPercentWidth(15);
@@ -72,15 +81,13 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 	 * This method defines the components on the screen and adds them to it.
 	 */
 	private void makeComponents(){
-
+		//Adds a back button to go to previous screen
 		back = new Button("Back");
 		back.setOnAction(buttonHandler);
 		back.setMinSize(0, 0);
 		back.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		back.getStyleClass().add("but");
 		this.add(back,0,0);
-
-
 
 		GridPane gridpane2 = new GridPane();
 
@@ -101,6 +108,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 	    subcol.setPercentWidth(100);
 	    gridpane2.getColumnConstraints().addAll(subcol);
 
+		//Adds a button to go to add single screen
 		single = new Button("Add Single");
 		single.setOnAction(buttonHandler);
 		single.setMinSize(0, 0);
@@ -109,7 +117,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 		single.getStyleClass().add("but");
 		gridpane2.add(single,0,0);
 
-
+		//Adds a button to go to add album screen
 		album = new Button("Add Album");
 		album.setOnAction(buttonHandler);
 		album.setMinSize(0, 0);
@@ -118,7 +126,7 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 		album.getStyleClass().add("but");
 		gridpane2.add(album,0,2);
 
-
+		//Adds a button to go to remove song screen
 		song = new Button("Remove Song");
 		song.setOnAction(buttonHandler);
 		song.setMinSize(0, 0);
@@ -127,12 +135,10 @@ public class Screen_2B extends GridPane implements ScreenInterface{
 		song.getStyleClass().add("but");
 		gridpane2.add(song,0,4);
 
-
-
 		this.add(gridpane2,2,2);
-
-
 	}//end makeComponents
+	
+	//An eventhandler to switch screens when a button is pressed
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
