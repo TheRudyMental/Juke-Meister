@@ -14,6 +14,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
+/**
+ * Remove song screen to search and remove songs
+ * @author Saige Pattel
+ * @version 4/29/16
+ */
 public class Screen_2B3 extends GridPane implements ScreenInterface {
 
 	private static Screen_2B3 instance;
