@@ -1,112 +1,118 @@
 package screen;
 
+import java.util.ArrayList;
+
+import control.VenueAndMessageListener;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.VPos;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.RowConstraints;
+
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /*
  * @author Grant Brown
- * This class is to define the Extra Options screen
+ * This class is to define the advanced options screen for the screen saver
  */
-
-public class Screen_2D extends GridPane implements ScreenInterface{
+public class Screen_2D extends BorderPane implements ScreenInterface,control.VenueAndMessageSubject{
 
 	private static Screen_2D instance;
-
+	/*Back button for this screen*/
 	private Button back;
+	/*Text field for the venue name*/
+	private TextField vName;
+	/*Text field for the message to be displayed*/
+	private TextField message;
 
-	private Button advanced;
-
+	private static ArrayList<VenueAndMessageListener> o;
 	Screen_2D() {
-		setContraints();
-		setupComponents();
+		makeComponents();
+		o = new ArrayList<VenueAndMessageListener>();
 	}
 
+	/**
+	 * This method returns the singleton instance of this screen
+	 * @return the singleton instance of this screen
+	 */
 	public static ScreenInterface getInstance() {
-		if(instance != null){
-			return instance;
-		}
-		else{
+		if(instance == null){
 			instance = new Screen_2D();
 			return instance;
 		}
+		else{
+			return instance;
+		}
 	}
 
-	private void setContraints(){
-		ColumnConstraints col0 = new ColumnConstraints();
-		col0.setPercentWidth(20);
-		ColumnConstraints col1 = new ColumnConstraints();
-		col1.setPercentWidth(80);
-		this.getColumnConstraints().addAll(col0,col1);
+	/**
+	 * Creates all the components on the screen at once
+	 */
+	private void makeComponents(){
+		this.setOnKeyPressed(keyHandler);
 
-		RowConstraints row0 = new RowConstraints();
-		row0.setPercentHeight(20);
-		RowConstraints row1 = new RowConstraints();
-		row1.setPercentHeight(80);
-		this.getRowConstraints().addAll(row0,row1);
-	}
-
-	private void setupComponents(){
 		back = new Button("Back");
-		back.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+		back.setMaxSize(75, Integer.MAX_VALUE);
 		back.setOnAction(buttonHandler);
 		back.getStyleClass().add("but");
-		this.add(back, 0, 0);
+		this.setTop(back);
 
 
+		VBox contain = new VBox();//thing to put in center
+
+		VBox fields = new VBox();//box to put text fields in
+		TextField time = new TextField();
+		time.setPromptText("Enter Timer (In Minutes):");
+		time.getStyleClass().add("text");
+
+		vName = new TextField();
+		vName.setPromptText("Enter Venue Name:");
+		vName.getStyleClass().add("text");
+
+		message = new TextField();
+		message.setPromptText("Enter Message:");
+		message.getStyleClass().add("text");
+
+		fields.getChildren().addAll(time,vName,message);
+		fields.setSpacing(20);
+		fields.setAlignment(Pos.CENTER);
+
+		HBox picture = new HBox(); // thing to hold picture label and button
+		Label pic = new Label("Picture: ");
+		Button fileUpload = new Button("Browse");
+		fileUpload.getStyleClass().add("but");
+
+		picture.getChildren().addAll(pic,fileUpload);
+		picture.setSpacing(75);
+
+		contain.getChildren().addAll(fields,picture);
+		contain.setFillWidth(false);
+		contain.setSpacing(20);
+		contain.setPadding(new Insets( 250, 0, 0, 600));
+		this.setCenter(contain);
 
 
-		HBox attract = new HBox();
-		Label at = new Label("Attract: ");
-		at.getStyleClass().add("label");
-		Button toggle1 = new Button("On/Off"); //TODO: add toggle functionality later
-		toggle1.setPrefSize(200,25);
-		toggle1.getStyleClass().add("but");
-		attract.getChildren().addAll(at,toggle1);
-		attract.setSpacing(30);
-
-		TextField minutes = new TextField();
-		minutes.setPromptText("Enter Timer (In minutes):");//TODO: add data entry functionality
-		minutes.setMaxSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-		minutes.getStyleClass().add("text");
-
-		HBox screenSaver = new HBox();
-		Label screen = new Label("Screen Saver: ");
-		screen.getStyleClass().add("label");
-		Button toggle2 = new Button("On/Off");
-		toggle2.setPrefSize(200, 25);
-		toggle2.getStyleClass().add("but");
-		screenSaver.getChildren().addAll(screen,toggle2);
-		screenSaver.setSpacing(30);
-
-		advanced = new Button("Advanced Options");
-		advanced.setWrapText(true);
-		advanced.setPrefSize(150,100);
-		advanced.setOnAction(buttonHandler);
-		advanced.getStyleClass().add("but");
-
-		VBox whole = new VBox();
-		whole.getChildren().addAll(attract,minutes,screenSaver,advanced);
-		whole.setFillWidth(false);
-		whole.setSpacing(30);
-		whole.setPadding(new Insets(150, 0, 0, 300));
-		this.add(whole, 1, 1,1,1);
-
-		setHalignment(whole, HPos.CENTER);
-		setValignment(whole, VPos.CENTER);
 	}
+
+	/**
+	 * Set up the keyboard for all the text fields
+	 */
+	public void setUpKeyboard(){
+		vName.getProperties().put("vkType", "full");
+		message.getProperties().put("vkyType", "full");
+	}
+	/**
+	 * Handler for the buttons on screen
+	 */
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -114,12 +120,40 @@ public class Screen_2D extends GridPane implements ScreenInterface{
         if(event.getSource()==back){
         	temp.setScene(ScreenBuilder.buildScreen2());
         }
-        if(event.getSource()==advanced){
-        	temp.setScene(ScreenBuilder.buildScreen2d1());
-        }
         temp.getScene().getStylesheets().add(getClass().getResource("application.css").toExternalForm());
         temp.setFullScreen(true);
         temp.show();
         }
     };
+
+    EventHandler<KeyEvent> keyHandler = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+        		if(event.getCode() == KeyCode.ENTER){
+        			notifyListeners(vName.getText(),message.getText());
+        		}
+        }
+    };
+
+    /**
+     * @see VenueAndMessageSubject
+     */
+	@Override
+	public void notifyListeners(String venueName, String message) {
+		for(VenueAndMessageListener vml : o){
+			if(venueName != null){
+				vml.updateVenueName(venueName);
+			}
+			if(message != null){
+				vml.updateMessage(message);
+			}
+		}
+	}
+
+	public static void register(VenueAndMessageListener vml){
+		getInstance();
+		System.out.println("Adding");
+		o.add(vml);
+	}
+
 }

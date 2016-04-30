@@ -13,8 +13,8 @@ public class UIBuilder {
 	private static Screen_2B2 screen2b2;
 	private static Screen_2B3 screen2b3;
 	private static Screen_2C screen2c;
-	private static Screen_2D screen2d;
-	private static Screen_2D1 screen2d1;
+
+	private static Screen_2D screen2d1;
 
 	public static Pane getScreen_1(){
 		if(screen1 == null)
@@ -71,14 +71,10 @@ public class UIBuilder {
 			screen2c = new Screen_2C();
 		return screen2c;
 	}
-	public static Screen_2D getScreen_2D(){
-		if(screen2d == null)
-			screen2d = new Screen_2D();
-		return screen2d;
-	}
-	public static Screen_2D1 getScreen_2D1(){
+
+	public static Screen_2D getScreen_2D1(){
 		if(screen2d1 == null)
-			screen2d1 = (Screen_2D1) Screen_2D1.getInstance();
+			screen2d1 = (Screen_2D) Screen_2D.getInstance();
 		return screen2d1;
 	}
 

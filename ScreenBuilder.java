@@ -13,7 +13,6 @@ public class ScreenBuilder {
 	private static Scene screen2b2;
 	private static Scene screen2b3;
 	private static Scene screen2c;
-	private static Scene screen2d;
 	private static Scene screen2d1;
 
 	public static Scene buildScreen1(){
@@ -79,12 +78,7 @@ public class ScreenBuilder {
 		}
 		return screen2c;
 	}
-	public static Scene buildScreen2d(){
-		if(screen2d == null){
-			screen2d = new Scene(UIBuilder.getScreen_2D());
-		}
-		return screen2d;
-	}
+
 	public static Scene buildScreen2d1(){
 		if(screen2d1 == null){
 			screen2d1 = new Scene(UIBuilder.getScreen_2D1());
