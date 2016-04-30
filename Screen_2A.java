@@ -16,7 +16,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 /**
- * Stats screen
+ * Stats screen that shows the Juke Meister's statistics
  *
  * @author JamieBurchette
  * @version 4/29/16
