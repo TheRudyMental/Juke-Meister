@@ -6,9 +6,9 @@ import screen.Screen_2A;
 import screen.UIBuilder;
 
 /**
- *
- * @author JamieBurchette
- *
+ * Holds the Juke Meister's credits and all info about them
+ * @author JamieBurchette, Zacharay Larenzo, Grant Brown
+ * @version 4/29/16
  */
 public class Credits implements CreditsIF, CreditSubject{
 	/*The things observing the credit controller*/
@@ -28,13 +28,38 @@ public class Credits implements CreditsIF, CreditSubject{
 	//the number of credits the user gets when a bonus has been reached
 	private int getBonus;
 	//the number of bonus credits the user has
+	//Current credits that can be used to play songs
+	private int currentCredits;
+	
+	//Total amount of credits put in machine
+	private int totalCredits;
+	
+	//Total amount of credits needed to play a song
+	private int songPrice;
+	
+	//Amount of credits you need to buy to get a bonus
+	private int buyBonus;
+	
+	//Amount of credits you get as a bonus
+	private int getBonus;
+	
+	//Bonus credits earned
 	private int bonusCredits;
+	
+	//Credits that have been entered in a row for counting the bonus
 	private int creditsEntered;
 	//The price for a single credit
 	private double creditPrice;
 	//The money that the current user has entered
 	private double currentMoney;
 	//The total amount of money that is in the machine 
+	//The amount of money you need to purchase a credit
+	private double creditPrice;
+	
+	//The amount of money put in the machine that hasn't been converted into credits
+	private double currentMoney;
+	
+	//Total amount of money placed in machine
 	private double totalMoney;
 
 	private Credits(){
