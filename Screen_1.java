@@ -29,8 +29,13 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Creates the home screen
+ * @author Grant Brown, Zacharay Larenzo, Jamie Burchette, Saige Pattel
+ * @version 4/29/16
+ */
 public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver,control.VenueAndMessageListener{
-
+	/*Singleton instance of screen*/
 	private static Screen_1 instance;
 	/*Button used for browsing*/
 	private Button browse;
@@ -40,9 +45,12 @@ public class Screen_1 extends GridPane implements ScreenInterface,CreditObserver
 	private Label vName;
 	/*Label to hold message entered by admin, blank by default*/
 	private Label message;
-
+	/*Label that shows name of song currently playing*/
 	Label nowPlaying;
 
+	/**
+	 * initiates the screen
+	 */
 	Screen_1() {
 		setConstraints();
 		makeComponents();
