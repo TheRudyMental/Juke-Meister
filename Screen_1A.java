@@ -24,18 +24,34 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
+/**
+ * Browse songs screen - A screen to search for songs
+ * @author Zachary Lorenzo
+ * @version 4/29/16
+ */
 public class Screen_1A extends GridPane implements ScreenInterface {
 
+	//The instance of the screen
 	private static Screen_1A instance;
 
+	//A button to go back to previous screen
 	Button back;
+	
 	/*Label for now playing song*/
 	Label nowPlaying;
+	
+	/**
+	 * Initiates the screen
+	 */
 	Screen_1A(){
 		setConstraints();
 		makeComponents();
 	}
 
+	/**
+	 * Returns the instance of the screen to prevent duplication
+	 * @return instance of screen
+	 */
 	public static ScreenInterface getInstance(){
 		if(instance != null){
 			return instance;
@@ -46,6 +62,9 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		}
 	}
 
+	/**
+	 * Sets rows and columns of the screen's grid
+	 */
 	private void setConstraints(){
 		ColumnConstraints col0 = new ColumnConstraints();
 		col0.setPercentWidth(20);
@@ -64,12 +83,21 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 
 	}
 
+	/**
+	 * Scales a button to full available space
+	 * @param b button to scale
+	 */
 	private void makeScale(Button b){
 		b.setMinHeight(0);
 		b.setMaxHeight(Double.MAX_VALUE);
 		b.setMinWidth(0);
 		b.setMaxWidth(Double.MAX_VALUE);
 	}
+	
+	/**
+	 * Scales a textField to full available space
+	 * @param t textField to scale
+	 */
 	private void makeScale(TextField t){
 		t.setMinHeight(0);
 		t.setMaxHeight(Double.MAX_VALUE);
@@ -77,14 +105,21 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		t.setMaxWidth(Double.MAX_VALUE);
 	}
 
+	/**
+	 * Makes the components placed in the screen
+	 */
 	private void makeComponents(){
+		//Sets a handler for inserting money
 		this.setOnKeyPressed(keyHandler);
+		
+		//Creates a button to go back to previous screen
 		back = new Button("Back");
 		makeScale(back);
 		back.setOnAction(buttonHandler);
 		back.getStyleClass().add("but");
 		this.add(back,0,0);
 
+		//Creates a text field to search for specific songs
 		TextField search = new TextField();
 		search.setPromptText("Search...");
 		makeScale(search);
@@ -92,7 +127,7 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 		//query
 		this.add(search,1,0);
 
-
+		//Adds a grid with a list of letters (A to Z)
 		GridPane atoz = new GridPane();
 		ColumnConstraints third = new ColumnConstraints();
 		third.setPercentWidth(33);
@@ -104,22 +139,27 @@ public class Screen_1A extends GridPane implements ScreenInterface {
 			Label l = new Label(((char)('A'+i))+"");
 			setHalignment(l, HPos.CENTER);
 			l.getStyleClass().add("label");
-			//AddInvisButtonsHere
 			atoz.add(l , 1, i);
 		}
 		this.add(atoz,0,1);
 
-		SongUI test = SongUIIF.makeElement(new Song("Trap", "San Holo", 2014, new File("C:\\Users\\Grant\\workspace\\Juke-Meister\\src\\San Holo - Donkey Kong.mp3"), new File("C:\\Users\\Grant\\workspace\\Juke-Meister\\src\\BoI Mega Satan.png")));
+		//Adds a scroll pane to hold songs
+		SongUI test = SongUIIF.makeElement(new Song("Trap", "San Holo", 2014, 
+				new File("C:\\Users\\Grant\\workspace\\Juke-Meister\\src\\San Holo - Donkey Kong.mp3"),
+				new File("C:\\Users\\Grant\\workspace\\Juke-Meister\\src\\BoI Mega Satan.png")));
 		ScrollPane songlist = new ScrollPane(test);
 		songlist.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		songlist.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		this.add(songlist,1,1);
 
+		//A Label to show the song that is currently playing
 		nowPlaying = new Label ("");
 		setHalignment(nowPlaying, HPos.CENTER);
 		this.add(nowPlaying, 0, 2, 2, 1);
 
 	}
+	
+	//Handles the back button to go back a screen
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -133,7 +173,8 @@ public class Screen_1A extends GridPane implements ScreenInterface {
         temp.show();
         }
     };
-
+    
+    //Handles key presses to insert money
     EventHandler<InputEvent> keyHandler = new EventHandler<InputEvent>() {
         @Override
         public void handle(InputEvent event) {
@@ -165,6 +206,9 @@ public class Screen_1A extends GridPane implements ScreenInterface {
         }
     };
 
+	/**
+	 * Updates the now playing label to song currently being played
+	 */
 	public void updateNowPlaying(String playing){
 		nowPlaying.setText(playing);
 	}
