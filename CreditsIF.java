@@ -3,7 +3,8 @@ package control;
 /**
  * 
  * @author JamieBurchette
- *
+ * An interface to the Credits class to define methods that should be implemented within
+ *  @see Credits class to see the documentation for each of the methods below
  */
 public interface CreditsIF {
 	public void addCredit(int added);

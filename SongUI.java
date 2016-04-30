@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 public class SongUI extends HBox implements SongUIIF{
 	/*Song object that contains the info about the song*/
 	SongIF song;
-
+	/*Picture for the song to be displayed*/
 	ImageView pic;
 	/*The title of the song*/
 	Label title;

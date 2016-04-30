@@ -2,6 +2,11 @@ package Database;
 
 import java.util.Comparator;
 
+/**
+* This class is to compare two songs' week counter values,
+*   used to determine the popularity of the songs
+*
+*/
 public class SongCountSorter implements Comparator<Song> {
 
 	@Override

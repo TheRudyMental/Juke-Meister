@@ -14,6 +14,10 @@ import Database.SongDatabaseIF;
 import Database.SongIF;
 import control.SongFactory;
 
+/**
+*	Defines a class for actually storing the songs to be retrieved later
+*	
+*/
 public class DB_Controller implements SongDatabaseIF {
 
 	private String framework = "embedded";
@@ -21,13 +25,13 @@ public class DB_Controller implements SongDatabaseIF {
 	private String driver = "org.apache.derby.jdbc.EmbeddedDriver";
 
     private String protocol = "jdbc:derby:";
-
+	//Arraylist of songs to be added, or to be returned on searching
     public ArrayList<SongIF> songs;
-
+	//name of the database
     String songDB = "JukeMeisterDBateam";
-
+	//connection to the database
     Connection conn = null;
-
+	//number of records in the database
     int records;
 
     public DB_Controller(){
@@ -35,17 +39,30 @@ public class DB_Controller implements SongDatabaseIF {
         this.createTable();
         songs = selectAll(true);
     }
-
-    public void add(SongIF newSong){
+	/**
+	* Calls the insert method for a song to be added to the database
+	* @param newSong the song to be added
+	*
+	*/
+    public void add(SongIF newSong){	
     	this.insert(newSong);
         songs.add(newSong);
     }
 
+	/**
+	* When given the individual pieces of info for a song, creates a song using a 
+	*  factory, then calls the add method above on it
+	*
+	*/
     public void addRecord(String title, String artist, int year, File song, File picture){
     	SongIF s = SongFactory.makeSong(title, artist, year, song, picture);
         this.add(s);
     }
 
+	/**
+	* Removes a song given an index that the song will be in the arraylist
+	* @param index of the song to delete
+	*/
     public void remove(int index){
 
     	if(index < 0 || index >= this.getSize() ) return;
@@ -54,10 +71,20 @@ public class DB_Controller implements SongDatabaseIF {
     	this.remove(s);
     }
 
+	/**
+	*Updates a song's entry in the database 
+	* @param s the song that needs it's record updated
+	*/
     public void updateRecord(SongIF s){
     	this.update(s);
     }
 
+	/**
+	* Pulls a song from the database given its index in the 
+	*   arrayList
+	* @param index to pull from
+	*
+	*/
 	public SongIF getSong(int index) {
 		if(index > songs.size() || index < 0)
 			throw new IllegalArgumentException("Out of bounds!");
@@ -67,12 +94,20 @@ public class DB_Controller implements SongDatabaseIF {
 			return null;
 	}
 
+	/**
+	* @return the number of songs in the machine
+	*
+	*/
 	public int getSize() {
 		if(songs != null)
 			return songs.size();
 		return 0;
 	}
 
+	/**
+	* Gets songs that have the same title as the one given 
+	*@param title, the title to search for 
+	*/
     public  SongIF getSongByTitle(String title){
         if(title != null){
 
@@ -85,6 +120,10 @@ public class DB_Controller implements SongDatabaseIF {
         return null;
     }
 
+	/**
+	* Loads the driver for the database 
+	*
+	*/
     private void loadDriver() {
         try {
             Class.forName(driver).newInstance();
@@ -105,6 +144,10 @@ public class DB_Controller implements SongDatabaseIF {
         }
     }
 
+	/**
+	*Attempts to connect to the database
+	*
+	*/
     public Connection connect() {
 
     	boolean state = false;
@@ -125,6 +168,10 @@ public class DB_Controller implements SongDatabaseIF {
     	return null;
     }
 
+	/**
+	* Closes the database connection 
+	*
+	*/
     public void closeDB(){
     	 if (framework.equals("embedded"))
          {
@@ -147,6 +194,10 @@ public class DB_Controller implements SongDatabaseIF {
          }
     }
 
+	/**
+	* Creates the table of songs 
+	*
+	*/
     public void createTable() {
 
     	 if (conn == null)
@@ -179,6 +230,10 @@ public class DB_Controller implements SongDatabaseIF {
 	    }
     }
 
+	/**
+	* Inserts a song into the table 
+	*@param s the song to add into the database
+	*/
    private void insert(SongIF s) {
 
 	   if (conn == null)
@@ -209,6 +264,10 @@ public class DB_Controller implements SongDatabaseIF {
 
    }
 
+   /**
+	*Updates a song's record in the database to reflect its current state 
+	* @param s the song to update 
+	*/
    public void update(SongIF s) {
 
 	   if (conn == null)
@@ -239,6 +298,10 @@ public class DB_Controller implements SongDatabaseIF {
 
    }
 
+   /**
+	* Removes a song from the database 
+	*@param s the song to remove
+	*/
    public void remove(SongIF s){
 
 	   if (conn == null)
@@ -261,6 +324,10 @@ public class DB_Controller implements SongDatabaseIF {
 
    }
 
+   /**
+	* Removes a song given its title 
+	*@param title the title of the song to remove 
+	*/
    public void removeByTitle(String title){
 
 	   if (conn == null)
@@ -284,6 +351,10 @@ public class DB_Controller implements SongDatabaseIF {
 
    }
 
+   /**
+	* Drops the table of songs 
+	*
+	*/
    public void dropTable(){
 
 	   if (conn == null)
@@ -306,10 +377,18 @@ public class DB_Controller implements SongDatabaseIF {
 
    }
 
+   /**
+	* Pulls all songs from the database 
+	*
+	*/
 	public void loadAll(){
 		 selectAll(true);
 	}
 
+	/**
+	* Selects all the songs in the database 
+	*
+	*/
 	private ArrayList<SongIF> selectAll(boolean clear) {
 
 	   if (conn == null)
@@ -344,6 +423,11 @@ public class DB_Controller implements SongDatabaseIF {
 	   return songs;
    }
 
+   /**
+	*Pulls songs from the database given a condition to search 
+	* @param where the condition to add to the query 
+	*
+	*/
    public ArrayList<SongIF> selectSongs(String where, boolean clear) {
 
 

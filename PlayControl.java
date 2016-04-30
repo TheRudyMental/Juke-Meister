@@ -21,7 +21,7 @@ public class PlayControl implements PlayControlInf{
 	private static PlayControl instance;
 	//Holds all the songs to play
 	ArrayList<MediaPlayer> toPlay;
-
+	/*The currently playing song*/
 	private MediaPlayer current;
 
 	private PlayControl() {
@@ -29,6 +29,10 @@ public class PlayControl implements PlayControlInf{
 		toPlay = new ArrayList<MediaPlayer>();
 	}
 
+	/**
+	* Returns the singleton instance of the class
+	* @return instance
+	*/
 	public static PlayControlInf getInstance(){
 		if(instance == null){
 			instance = new PlayControl();
@@ -92,6 +96,11 @@ public class PlayControl implements PlayControlInf{
 		}
 	}
 
+	/**
+	* Takes the first element off the array list, and removes it
+	*@return the song to play
+	*
+	*/
 	public MediaPlayer pop(){
 		MediaPlayer play = toPlay.get(0);
 		toPlay.remove(0); //get the thing from front of list then remove it

@@ -2,6 +2,11 @@ package Database;
 
 import java.io.File;
 
+/**
+* This interface is for the song class to ensure a less tightly coupled
+*   system
+*@author Jaime Burchette
+*/
 public interface SongIF {
 	
 	public String getTitle();
