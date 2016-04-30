@@ -70,9 +70,6 @@ public class Screen_2D extends BorderPane implements ScreenInterface,control.Ven
 		VBox contain = new VBox();//thing to put in center
 
 		VBox fields = new VBox();//box to put text fields in
-		TextField time = new TextField();
-		time.setPromptText("Enter Timer (In Minutes):");
-		time.getStyleClass().add("text");
 
 		vName = new TextField();
 		vName.setPromptText("Enter Venue Name:");
