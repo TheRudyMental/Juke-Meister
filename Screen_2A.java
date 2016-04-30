@@ -19,19 +19,25 @@ import javafx.stage.Stage;
  * Stats screen
  *
  * @author JamieBurchette
- * @version 4/8/16
+ * @version 4/29/16
  *
  */
 public class Screen_2A extends GridPane implements ScreenInterface,control.MoneyListener{
-
+	//Instance of the screen
 	private static Screen_2A instance;
 
+	//A button to go to previous screen
 	private Button back;
 
+	//A button to go to table of previous weeks
 	private Button table;
 
+	//A textField containing the machine's current funds
 	TextField currentFunds;
 
+	/**
+	 * Initiates the screen
+	 */
 	Screen_2A() {
 		setConstraints();
 		makeComponents();
@@ -87,6 +93,7 @@ public class Screen_2A extends GridPane implements ScreenInterface,control.Money
 	 * This method defines the components on the screen and adds them to it.
 	 */
 	private void makeComponents(){
+		//Creates, positions, and adds a back button
 		back = new Button("Back");
 		this.add(back,0,0,1,1);
 		GridPane.setHalignment(back, HPos.LEFT);
@@ -96,6 +103,7 @@ public class Screen_2A extends GridPane implements ScreenInterface,control.Money
 		back.getStyleClass().add("but");
 		back.setOnAction(buttonHandler);
 
+		//Adds titles for the lists
 		Label topTracks = new Label("Top Tracks");
 		topTracks.getStyleClass().add("label");
 
@@ -117,6 +125,7 @@ public class Screen_2A extends GridPane implements ScreenInterface,control.Money
 			textGrid.getColumnConstraints().add(col);
 		}
 
+		//Current funds stored in machine
 		currentFunds = new TextField();
 		currentFunds.getStyleClass().add("text");
 		currentFunds.setEditable(false);
@@ -128,6 +137,7 @@ public class Screen_2A extends GridPane implements ScreenInterface,control.Money
 		GridPane.setHalignment(totalFunds,HPos.CENTER);
 		GridPane.setHalignment(currentFunds,HPos.CENTER);
 
+		//Swtitches to the table of previous weeks screen
 		table = new Button("Table of Previous Weeks");
 		this.add(table,1,5,2,1);
 		GridPane.setHalignment(table,HPos.CENTER);
@@ -136,6 +146,8 @@ public class Screen_2A extends GridPane implements ScreenInterface,control.Money
 		table.setOnAction(buttonHandler);
 		table.getStyleClass().add("but");
 	}
+	
+	//An eventhandler that allows the admin to switch screens 
 	EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -152,7 +164,11 @@ public class Screen_2A extends GridPane implements ScreenInterface,control.Money
         temp.show();
         }
     };
-
+    
+	/**
+	 * Updates current funds stored in machine
+	 * @return money the amount of money currently in machine
+	 */
 	@Override
 	public void updateMoney(double money){
 		currentFunds.setText("" + money);
